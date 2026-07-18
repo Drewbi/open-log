@@ -1,0 +1,13 @@
+{
+  "name": "mc-log-timeline",
+  "private": true,
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev:backend": "pnpm --filter @mc-log-timeline/backend dev",
+    "dev:frontend": "pnpm --filter @mc-log-timeline/frontend dev",
+    "build": "pnpm --filter @mc-log-timeline/frontend build",
+    "typecheck": "pnpm -r typecheck"
+  }
+}

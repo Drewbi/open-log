@@ -1,0 +1,3 @@
+{$DOMAIN} {
+	reverse_proxy mc-log-timeline:4000
+}

@@ -1,0 +1,393 @@
+[
+  {
+    "id": "join",
+    "pattern": "^(?<actor>[A-Za-z0-9_]+) joined the game$",
+    "eventType": "join",
+    "isPOI": true,
+    "priority": 100,
+    "confidence": "confirmed",
+    "severity": "normal",
+    "summaryTemplate": "{actor} joined the game"
+  },
+  {
+    "id": "leave",
+    "pattern": "^(?<actor>[A-Za-z0-9_]+) left the game$",
+    "eventType": "leave",
+    "isPOI": true,
+    "priority": 100,
+    "confidence": "confirmed",
+    "severity": "normal",
+    "summaryTemplate": "{actor} left the game"
+  },
+  {
+    "id": "command",
+    "pattern": "^(?<actor>[A-Za-z0-9_]+) issued server command: (?<target>.+)$",
+    "eventType": "command",
+    "isPOI": true,
+    "priority": 200,
+    "confidence": "confirmed",
+    "severity": "high",
+    "summaryTemplate": "{actor} ran {target}"
+  },
+  {
+    "id": "server_start",
+    "pattern": "^Done \\([0-9.]+s\\)! For help, type \"help\"",
+    "eventType": "server_start",
+    "isPOI": true,
+    "priority": 100,
+    "confidence": "confirmed",
+    "severity": "normal",
+    "summaryTemplate": "Server finished starting"
+  },
+  {
+    "id": "lost_connection",
+    "pattern": "^(?<actor>[A-Za-z0-9_]+)(?: \\([^)]*\\))? lost connection: (?<target>.+)$",
+    "eventType": "leave",
+    "isPOI": false,
+    "priority": 60,
+    "confidence": "confirmed",
+    "severity": "normal",
+    "summaryTemplate": "{actor} lost connection: {target}"
+  },
+  {
+    "id": "kicked",
+    "pattern": "^(?<actor>[A-Za-z0-9_]+) was kicked (?<target>.+)$",
+    "eventType": "leave",
+    "isPOI": false,
+    "priority": 60,
+    "confidence": "confirmed",
+    "severity": "normal",
+    "summaryTemplate": "{actor} was kicked {target}"
+  },
+  {
+    "id": "anticheat_moved_too_quickly",
+    "pattern": "^(?<actor>[A-Za-z0-9_]+) moved too quickly!",
+    "eventType": "leave",
+    "isPOI": false,
+    "priority": 60,
+    "confidence": "confirmed",
+    "severity": "normal",
+    "summaryTemplate": "{actor} moved too quickly (anti-cheat warning)"
+  },
+  {
+    "id": "anticheat_moved_wrongly",
+    "pattern": "^(?<actor>[A-Za-z0-9_]+) moved wrongly!",
+    "eventType": "leave",
+    "isPOI": false,
+    "priority": 60,
+    "confidence": "confirmed",
+    "severity": "normal",
+    "summaryTemplate": "{actor} moved wrongly (anti-cheat warning)"
+  },
+  {
+    "id": "server_stop",
+    "pattern": "^Stopping( the)? server$",
+    "eventType": "server_stop",
+    "isPOI": true,
+    "priority": 100,
+    "confidence": "confirmed",
+    "severity": "normal",
+    "summaryTemplate": "Server stopping"
+  },
+  {
+    "id": "sleep_autopause",
+    "pattern": "^Server empty for \\d+ seconds, pausing$",
+    "eventType": "sleep",
+    "isPOI": true,
+    "priority": 90,
+    "confidence": "confirmed",
+    "severity": "normal",
+    "summaryTemplate": "Server went to sleep (no players online)"
+  },
+  {
+    "id": "death_slain_by",
+    "pattern": "^(?<actor>[A-Za-z0-9_]+) was slain by (?<target>.+)$",
+    "eventType": "death",
+    "isPOI": true,
+    "priority": 50,
+    "confidence": "confirmed",
+    "severity": "normal",
+    "summaryTemplate": "{actor} was slain by {target}"
+  },
+  {
+    "id": "death_shot_by",
+    "pattern": "^(?<actor>[A-Za-z0-9_]+) was shot by (?<target>.+)$",
+    "eventType": "death",
+    "isPOI": true,
+    "priority": 50,
+    "confidence": "confirmed",
+    "severity": "normal",
+    "summaryTemplate": "{actor} was shot by {target}"
+  },
+  {
+    "id": "death_drowned_escape",
+    "pattern": "^(?<actor>[A-Za-z0-9_]+) drowned whilst trying to escape (?<target>.+)$",
+    "eventType": "death",
+    "isPOI": true,
+    "priority": 51,
+    "confidence": "confirmed",
+    "severity": "normal",
+    "summaryTemplate": "{actor} drowned whilst trying to escape {target}"
+  },
+  {
+    "id": "death_drowned",
+    "pattern": "^(?<actor>[A-Za-z0-9_]+) drowned$",
+    "eventType": "death",
+    "isPOI": true,
+    "priority": 50,
+    "confidence": "confirmed",
+    "severity": "normal",
+    "summaryTemplate": "{actor} drowned"
+  },
+  {
+    "id": "death_blown_up_by",
+    "pattern": "^(?<actor>[A-Za-z0-9_]+) was blown up by (?<target>.+)$",
+    "eventType": "death",
+    "isPOI": true,
+    "priority": 51,
+    "confidence": "confirmed",
+    "severity": "normal",
+    "summaryTemplate": "{actor} was blown up by {target}"
+  },
+  {
+    "id": "death_blew_up",
+    "pattern": "^(?<actor>[A-Za-z0-9_]+) blew up$",
+    "eventType": "death",
+    "isPOI": true,
+    "priority": 50,
+    "confidence": "confirmed",
+    "severity": "normal",
+    "summaryTemplate": "{actor} blew up"
+  },
+  {
+    "id": "death_fell_high_place",
+    "pattern": "^(?<actor>[A-Za-z0-9_]+) fell from a high place$",
+    "eventType": "death",
+    "isPOI": true,
+    "priority": 50,
+    "confidence": "confirmed",
+    "severity": "normal",
+    "summaryTemplate": "{actor} fell from a high place"
+  },
+  {
+    "id": "death_fell_off",
+    "pattern": "^(?<actor>[A-Za-z0-9_]+) fell off (?<target>.+)$",
+    "eventType": "death",
+    "isPOI": true,
+    "priority": 51,
+    "confidence": "confirmed",
+    "severity": "normal",
+    "summaryTemplate": "{actor} fell off {target}"
+  },
+  {
+    "id": "death_hit_ground",
+    "pattern": "^(?<actor>[A-Za-z0-9_]+) hit the ground too hard$",
+    "eventType": "death",
+    "isPOI": true,
+    "priority": 50,
+    "confidence": "confirmed",
+    "severity": "normal",
+    "summaryTemplate": "{actor} hit the ground too hard"
+  },
+  {
+    "id": "death_squashed_by",
+    "pattern": "^(?<actor>[A-Za-z0-9_]+) was squashed by (?<target>.+)$",
+    "eventType": "death",
+    "isPOI": true,
+    "priority": 51,
+    "confidence": "confirmed",
+    "severity": "normal",
+    "summaryTemplate": "{actor} was squashed by {target}"
+  },
+  {
+    "id": "death_lava",
+    "pattern": "^(?<actor>[A-Za-z0-9_]+) tried to swim in lava",
+    "eventType": "death",
+    "isPOI": true,
+    "priority": 50,
+    "confidence": "confirmed",
+    "severity": "normal",
+    "summaryTemplate": "{actor} tried to swim in lava"
+  },
+  {
+    "id": "death_flames",
+    "pattern": "^(?<actor>[A-Za-z0-9_]+) went up in flames$",
+    "eventType": "death",
+    "isPOI": true,
+    "priority": 50,
+    "confidence": "confirmed",
+    "severity": "normal",
+    "summaryTemplate": "{actor} went up in flames"
+  },
+  {
+    "id": "death_burned",
+    "pattern": "^(?<actor>[A-Za-z0-9_]+) burned to death$",
+    "eventType": "death",
+    "isPOI": true,
+    "priority": 50,
+    "confidence": "confirmed",
+    "severity": "normal",
+    "summaryTemplate": "{actor} burned to death"
+  },
+  {
+    "id": "death_burnt_fighting",
+    "pattern": "^(?<actor>[A-Za-z0-9_]+) was burnt to a crisp whilst fighting (?<target>.+)$",
+    "eventType": "death",
+    "isPOI": true,
+    "priority": 51,
+    "confidence": "confirmed",
+    "severity": "normal",
+    "summaryTemplate": "{actor} was burnt to a crisp fighting {target}"
+  },
+  {
+    "id": "death_withered",
+    "pattern": "^(?<actor>[A-Za-z0-9_]+) withered away$",
+    "eventType": "death",
+    "isPOI": true,
+    "priority": 50,
+    "confidence": "confirmed",
+    "severity": "normal",
+    "summaryTemplate": "{actor} withered away"
+  },
+  {
+    "id": "death_starved",
+    "pattern": "^(?<actor>[A-Za-z0-9_]+) starved to death$",
+    "eventType": "death",
+    "isPOI": true,
+    "priority": 50,
+    "confidence": "confirmed",
+    "severity": "normal",
+    "summaryTemplate": "{actor} starved to death"
+  },
+  {
+    "id": "death_suffocated",
+    "pattern": "^(?<actor>[A-Za-z0-9_]+) suffocated in a wall$",
+    "eventType": "death",
+    "isPOI": true,
+    "priority": 50,
+    "confidence": "confirmed",
+    "severity": "normal",
+    "summaryTemplate": "{actor} suffocated in a wall"
+  },
+  {
+    "id": "death_killed_by",
+    "pattern": "^(?<actor>[A-Za-z0-9_]+) was killed by (?<target>.+)$",
+    "eventType": "death",
+    "isPOI": true,
+    "priority": 51,
+    "confidence": "confirmed",
+    "severity": "normal",
+    "summaryTemplate": "{actor} was killed by {target}"
+  },
+  {
+    "id": "death_pricked",
+    "pattern": "^(?<actor>[A-Za-z0-9_]+) was pricked to death$",
+    "eventType": "death",
+    "isPOI": true,
+    "priority": 50,
+    "confidence": "confirmed",
+    "severity": "normal",
+    "summaryTemplate": "{actor} was pricked to death"
+  },
+  {
+    "id": "death_lightning",
+    "pattern": "^(?<actor>[A-Za-z0-9_]+) was struck by lightning$",
+    "eventType": "death",
+    "isPOI": true,
+    "priority": 50,
+    "confidence": "confirmed",
+    "severity": "normal",
+    "summaryTemplate": "{actor} was struck by lightning"
+  },
+  {
+    "id": "death_floor_lava",
+    "pattern": "^(?<actor>[A-Za-z0-9_]+) discovered floor was lava$",
+    "eventType": "death",
+    "isPOI": true,
+    "priority": 50,
+    "confidence": "confirmed",
+    "severity": "normal",
+    "summaryTemplate": "{actor} discovered the floor was lava"
+  },
+  {
+    "id": "death_impaled_by",
+    "pattern": "^(?<actor>[A-Za-z0-9_]+) was impaled by (?<target>.+)$",
+    "eventType": "death",
+    "isPOI": true,
+    "priority": 51,
+    "confidence": "confirmed",
+    "severity": "normal",
+    "summaryTemplate": "{actor} was impaled by {target}"
+  },
+  {
+    "id": "death_anvil",
+    "pattern": "^(?<actor>[A-Za-z0-9_]+) was skewered by a falling anvil$",
+    "eventType": "death",
+    "isPOI": true,
+    "priority": 50,
+    "confidence": "confirmed",
+    "severity": "normal",
+    "summaryTemplate": "{actor} was skewered by a falling anvil"
+  },
+  {
+    "id": "death_doomed_fall",
+    "pattern": "^(?<actor>[A-Za-z0-9_]+) was doomed to fall",
+    "eventType": "death",
+    "isPOI": true,
+    "priority": 50,
+    "confidence": "confirmed",
+    "severity": "normal",
+    "summaryTemplate": "{actor} was doomed to fall"
+  },
+  {
+    "id": "death_bang",
+    "pattern": "^(?<actor>[A-Za-z0-9_]+) went off with a bang$",
+    "eventType": "death",
+    "isPOI": true,
+    "priority": 50,
+    "confidence": "confirmed",
+    "severity": "normal",
+    "summaryTemplate": "{actor} went off with a bang"
+  },
+  {
+    "id": "death_killed_trying_to_hurt",
+    "pattern": "^(?<actor>[A-Za-z0-9_]+) was killed( while)? trying to hurt (?<target>.+)$",
+    "eventType": "death",
+    "isPOI": true,
+    "priority": 51,
+    "confidence": "confirmed",
+    "severity": "normal",
+    "summaryTemplate": "{actor} was killed trying to hurt {target}"
+  },
+  {
+    "id": "death_kinetic_energy_create_mod",
+    "pattern": "^(?<actor>[A-Za-z0-9_]+) experienced kinetic energy$",
+    "eventType": "death",
+    "isPOI": true,
+    "priority": 50,
+    "confidence": "confirmed",
+    "severity": "normal",
+    "summaryTemplate": "{actor} experienced kinetic energy (Create mod)"
+  },
+  {
+    "id": "death_died",
+    "pattern": "^(?<actor>[A-Za-z0-9_]+) died$",
+    "eventType": "death",
+    "isPOI": true,
+    "priority": 40,
+    "confidence": "confirmed",
+    "severity": "normal",
+    "summaryTemplate": "{actor} died"
+  },
+  {
+    "id": "death_heuristic_fallback",
+    "pattern": "^(?<actor>[A-Za-z0-9_]+) (?<target>.+)$",
+    "eventType": "death",
+    "isPOI": true,
+    "priority": 1,
+    "confidence": "heuristic",
+    "severity": "normal",
+    "summaryTemplate": "{actor} {target}",
+    "requiresKnownActor": true
+  }
+]

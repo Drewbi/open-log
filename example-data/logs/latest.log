@@ -1,0 +1,505 @@
+[00:22:41] [main/INFO]: Loading Minecraft 26.2 with Fabric Loader 0.19.3
+[00:22:41] [main/INFO]: Mappings not present!
+[00:22:41] [main/INFO]: Loading 45 mods:
+	- disconnect-packet-fix 2.2.0
+	- distanthorizons 3.2.0-b
+	   |-- fabric-api 0.149.0+26.2
+	   |    |-- fabric-api-base 2.0.3+ece0632325
+	   |    |-- fabric-api-lookup-api-v1 2.0.14+11e1c9a325
+	   |    |-- fabric-biome-api-v1 18.0.4+35c80edc25
+	   |    |-- fabric-block-api-v1 3.0.2+ec56b60125
+	   |    |-- fabric-block-getter-api-v2 2.0.6+ec56b60125
+	   |    |-- fabric-command-api-v2 3.0.7+06488ac125
+	   |    |-- fabric-content-registries-v0 11.1.1+4c47a1cb25
+	   |    |-- fabric-convention-tags-v2 4.6.0+1c8adc7f25
+	   |    |-- fabric-crash-report-info-v1 1.0.4+086d547a25
+	   |    |-- fabric-creative-tab-api-v1 5.0.12+d871b99e25
+	   |    |-- fabric-data-attachment-api-v1 2.2.12+efcef49d25
+	   |    |-- fabric-data-generation-api-v1 25.3.0+d8981f5825
+	   |    |-- fabric-debug-api-v1 1.0.1+c792624d25
+	   |    |-- fabric-dimensions-v1 5.1.6+9cbf5da525
+	   |    |-- fabric-entity-events-v1 5.0.4+06488ac125
+	   |    |-- fabric-events-interaction-v0 5.2.2+efcef49d25
+	   |    |-- fabric-game-rule-api-v1 4.0.7+46a6d00c25
+	   |    |-- fabric-item-api-v1 14.1.4+0ecb053f25
+	   |    |-- fabric-key-mapping-api-v1 2.0.4+e2bdee7825
+	   |    |-- fabric-lifecycle-events-v1 4.1.0+9d6daa9725
+	   |    |-- fabric-loot-api-v3 3.0.15+06488ac125
+	   |    |-- fabric-menu-api-v1 2.0.14+086d547a25
+	   |    |-- fabric-message-api-v1 7.0.6+086d547a25
+	   |    |-- fabric-networking-api-v1 6.3.2+72073ef025
+	   |    |-- fabric-object-builder-api-v1 24.0.3+46a6d00c25
+	   |    |-- fabric-particles-v1 5.0.16+b61fef4325
+	   |    |-- fabric-permission-api-v1 1.0.0+5f4a394125
+	   |    |-- fabric-recipe-api-v1 9.0.17+11e1c9a325
+	   |    |-- fabric-registry-sync-v0 7.0.14+b61fef4325
+	   |    |-- fabric-rendering-fluids-v1 6.0.3+06488ac125
+	   |    |-- fabric-rendering-v1 25.1.2+46a6d00c25
+	   |    |-- fabric-resource-conditions-api-v1 6.0.6+06488ac125
+	   |    |-- fabric-resource-loader-v0 3.3.18+4fc5413f25
+	   |    |-- fabric-resource-loader-v1 2.0.11+d3d8447225
+	   |    |-- fabric-screen-api-v1 5.0.2+086d547a25
+	   |    |-- fabric-serialization-api-v1 2.0.3+11a26f3125
+	   |    |-- fabric-sound-api-v1 2.0.4+11a26f3125
+	   |    |-- fabric-tag-api-v1 2.1.0+d8981f5825
+	   |    |-- fabric-transfer-api-v1 8.0.8+39b5a39225
+	   |    \-- fabric-transitive-access-wideners-v1 8.1.1+46a6d00c25
+	   |-- fabric-api-base 2.0.3+ece0632325
+	   |-- fabric-api-lookup-api-v1 2.0.14+11e1c9a325
+	   |-- fabric-biome-api-v1 18.0.4+35c80edc25
+	   |-- fabric-block-api-v1 3.0.2+ec56b60125
+	   |-- fabric-block-getter-api-v2 2.0.6+ec56b60125
+	   |-- fabric-client-gametest-api-v1 5.0.18+991fd34125
+	   |-- fabric-command-api-v2 3.0.7+06488ac125
+	   |-- fabric-content-registries-v0 11.1.1+4c47a1cb25
+	   |-- fabric-convention-tags-v2 4.6.0+1c8adc7f25
+	   |-- fabric-crash-report-info-v1 1.0.4+086d547a25
+	   |-- fabric-creative-tab-api-v1 5.0.12+d871b99e25
+	   |-- fabric-data-attachment-api-v1 2.2.12+efcef49d25
+	   |-- fabric-data-generation-api-v1 25.3.0+d8981f5825
+	   |-- fabric-debug-api-v1 1.0.1+c792624d25
+	   |-- fabric-dimensions-v1 5.1.6+9cbf5da525
+	   |-- fabric-entity-events-v1 5.0.4+06488ac125
+	   |-- fabric-events-interaction-v0 5.2.2+efcef49d25
+	   |-- fabric-game-rule-api-v1 4.0.7+46a6d00c25
+	   |-- fabric-item-api-v1 14.1.4+0ecb053f25
+	   |-- fabric-key-mapping-api-v1 2.0.4+e2bdee7825
+	   |-- fabric-lifecycle-events-v1 4.1.0+9d6daa9725
+	   |-- fabric-loot-api-v3 3.0.15+06488ac125
+	   |-- fabric-menu-api-v1 2.0.14+086d547a25
+	   |-- fabric-message-api-v1 7.0.6+086d547a25
+	   |-- fabric-networking-api-v1 6.3.2+72073ef025
+	   |-- fabric-object-builder-api-v1 24.0.3+46a6d00c25
+	   |-- fabric-particles-v1 5.0.16+b61fef4325
+	   |-- fabric-permission-api-v1 1.0.0+5f4a394125
+	   |-- fabric-recipe-api-v1 9.0.17+11e1c9a325
+	   |-- fabric-registry-sync-v0 7.0.14+b61fef4325
+	   |-- fabric-rendering-fluids-v1 6.0.3+06488ac125
+	   |-- fabric-rendering-v1 25.1.2+46a6d00c25
+	   |-- fabric-resource-conditions-api-v1 6.0.6+06488ac125
+	   |-- fabric-resource-loader-v0 3.3.18+4fc5413f25
+	   |-- fabric-resource-loader-v1 2.0.11+d3d8447225
+	   |-- fabric-screen-api-v1 5.0.2+086d547a25
+	   |-- fabric-serialization-api-v1 2.0.3+11a26f3125
+	   |-- fabric-sound-api-v1 2.0.4+11a26f3125
+	   |-- fabric-tag-api-v1 2.1.0+d8981f5825
+	   |-- fabric-transfer-api-v1 8.0.8+39b5a39225
+	   \-- fabric-transitive-access-wideners-v1 8.1.1+46a6d00c25
+	- fabricloader 0.19.3
+	   \-- mixinextras 0.5.4
+	- java 25
+	- minecraft 26.2
+	- spark 1.10.173
+	   \-- fabric-permissions-api-v0 0.7.0
+[00:22:41] [main/INFO]: SpongePowered MIXIN Subsystem Version=0.8.7 Source=file:/data/libraries/net/fabricmc/sponge-mixin/0.17.3+mixin.0.8.7/sponge-mixin-0.17.3+mixin.0.8.7.jar Service=Knot/Fabric Env=SERVER
+[00:22:41] [main/INFO]: Compatibility level set to JAVA_25
+[00:22:42] [main/INFO]: Initializing MixinExtras via com.llamalad7.mixinextras.service.MixinExtrasServiceImpl(version=0.5.4).
+[00:22:47] [main/INFO]: Disconnect Packet Fix has started.
+[00:22:47] [main/INFO]: Initializing Distant Horizons server, firing DhApiBeforeDhInitEvent event...
+[00:22:47] [main/INFO]: Running library validation...
+[00:22:47] [main/INFO]: Distant Horizons, Version: 3.2.0-b
+[00:22:47] [main/INFO]: Registering Fabric Server Events
+[00:22:47] [main/INFO]: Skipping mod compatibility accessor for: [starlight]
+[00:22:47] [main/INFO]: Skipping mod compatibility accessor for: [optifine]
+[00:22:47] [main/INFO]: Skipping mod compatibility accessor for: [bclib]
+[00:22:47] [main/INFO]: Skipping mod compatibility accessor for: [c2me]
+[00:22:47] [main/INFO]: Skipping mod compatibility accessor for: [imm_ptl_core]
+[00:22:47] [main/INFO]: Skipping mod compatibility accessor for: [iris]
+[00:22:47] [main/INFO]: Distant Horizons server Initialized, adding event subscribers...
+[00:22:47] [main/INFO]: Environment: Environment[sessionHost=https://sessionserver.mojang.com, servicesHost=https://api.minecraftservices.com, profilesHost=https://api.mojang.com, name=PROD]
+[00:22:49] [main/INFO]: Loaded 1585 recipes
+[00:22:49] [main/INFO]: Loaded 1688 advancements
+[00:22:49] [main/INFO]: Applied 0 biome modifications to 0 of 66 new biomes in 1.160 ms
+[00:22:49] [Server thread/INFO]: Initialising config for [DistantHorizons]
+[00:22:49] [Server thread/INFO]: [DistantHorizons] Config initialised
+[00:22:49] [Server thread/INFO]: Dimension ignoring disabled, DH will render all dimensions.
+[00:22:49] [Server thread/INFO]: Applying config to loggers
+[00:22:49] [Server thread/INFO]: Garbage collectors: [G1 Young Generation, G1 Concurrent GC, G1 Old Generation]
+[00:22:49] [Server thread/WARN]: Distant Horizons: G1 Garbage collector detected.
+This can cause FPS stuttering. 
+It's recommended to use a concurrent garbage collector 
+like ZGC (Java 21+) or Shenandoah (Java 8 through 17) 
+for a smoother experience. 
+This warning can be disabled in the DH config.
+[00:22:49] [Server thread/INFO]: Explicit Garbage Collection: [Enabled]
+[00:22:49] [Server thread/INFO]: Running Delayed setup...
+[00:22:49] [Server thread/INFO]: Delayed setup complete, firing DhApiAfterDhInitEvent event...
+[00:22:49] [Server thread/INFO]: Checking for Distant Horizons [STABLE] update for MC [26.2]...
+[00:22:50] [Server thread/INFO]: Distant Horizons already up to date.
+[00:22:50] [Server thread/INFO]: Distant Horizons server Initialized at 
+[00:22:50] [Server thread/INFO]: Starting background profiler...
+[00:22:50] [Server thread/INFO]: Started [DhServerWorld] of type [SERVER_ONLY].
+[00:22:50] [Server thread/INFO]: Starting minecraft server version 26.2
+[00:22:50] [Server thread/INFO]: Loading properties
+[00:22:50] [Server thread/INFO]: Default game type: SURVIVAL
+[00:22:50] [Server thread/INFO]: Generating keypair
+[00:22:50] [Server thread/INFO]: Starting Minecraft server on *:25565
+[00:22:50] [Server thread/INFO]: Preparing level "world"
+[00:22:51] [DH-Full Data Migration Thread[0]/INFO]: No migration necessary.
+[00:22:51] [Server thread/INFO]: Started DhServerLevel for [Wrapped{ServerLevel[GiminiCentral (GiminiCentral (world))]@minecraft:overworld}] at [[LocalSaveStructure@(./world/dimensions/minecraft/overworld/data)]].
+[00:22:51] [DH-Full Data Migration Thread[0]/INFO]: No migration necessary.
+[00:22:51] [Server thread/INFO]: Started DhServerLevel for [Wrapped{ServerLevel[GiminiCentral (GiminiCentral (world))]@minecraft:the_nether}] at [[LocalSaveStructure@(./world/dimensions/minecraft/overworld/data;./world/dimensions/minecraft/the_nether/data)]].
+[00:22:51] [DH-Full Data Migration Thread[0]/INFO]: No migration necessary.
+[00:22:51] [Server thread/INFO]: Started DhServerLevel for [Wrapped{ServerLevel[GiminiCentral (GiminiCentral (world))]@minecraft:the_end}] at [[LocalSaveStructure@(./world/dimensions/minecraft/overworld/data;./world/dimensions/minecraft/the_end/data;./world/dimensions/minecraft/the_nether/data)]].
+[00:22:51] [Server thread/INFO]: Loading 0 persistent chunks...
+[00:22:51] [Server thread/INFO]: Preparing spawn area: 100%
+[00:22:51] [Server thread/INFO]: Time elapsed: 142 ms
+[00:22:51] [Server thread/INFO]: Done (0.673s)! For help, type "help"
+[00:22:51] [Server thread/INFO]: Starting remote control listener
+[00:22:51] [Server thread/INFO]: Thread RCON Listener started
+[00:22:51] [Server thread/INFO]: RCON running on 0.0.0.0:25575
+[00:22:51] [Server thread/INFO]: Saving chunks for level 'ServerLevel[GiminiCentral (GiminiCentral (world))]'/minecraft:overworld
+[00:22:51] [Server thread/INFO]: Saving chunks for level 'ServerLevel[GiminiCentral (GiminiCentral (world))]'/minecraft:the_nether
+[00:22:51] [Server thread/INFO]: Saving chunks for level 'ServerLevel[GiminiCentral (GiminiCentral (world))]'/minecraft:the_end
+[00:22:51] [DH-Request Module Ticker [minecraft:overworld] Thread[0]/INFO]: Batch Chunk Generator initialized
+[00:22:51] [DH-Request Module Ticker [minecraft:overworld] Thread[0]/INFO]: Creating world gen queue
+[00:22:51] [DH-Request Module Ticker [minecraft:overworld] Thread[0]/INFO]: Created world gen queue
+[00:22:51] [DH-Request Module Ticker [minecraft:overworld] Thread[0]/INFO]: Set world gen queue for level [minecraft:overworld].
+[00:22:51] [DH-Request Module Ticker [minecraft:the_nether] Thread[0]/INFO]: Batch Chunk Generator initialized
+[00:22:51] [DH-Request Module Ticker [minecraft:the_nether] Thread[0]/INFO]: Creating world gen queue
+[00:22:51] [DH-Request Module Ticker [minecraft:the_nether] Thread[0]/INFO]: Created world gen queue
+[00:22:51] [DH-Request Module Ticker [minecraft:the_nether] Thread[0]/INFO]: Set world gen queue for level [minecraft:the_nether].
+[00:22:51] [DH-Request Module Ticker [minecraft:the_end] Thread[0]/INFO]: Batch Chunk Generator initialized
+[00:22:51] [DH-Request Module Ticker [minecraft:the_end] Thread[0]/INFO]: Creating world gen queue
+[00:22:51] [DH-Request Module Ticker [minecraft:the_end] Thread[0]/INFO]: Created world gen queue
+[00:22:51] [DH-Request Module Ticker [minecraft:the_end] Thread[0]/INFO]: Set world gen queue for level [minecraft:the_end].
+[00:22:51] [Server thread/INFO]: ThreadedAnvilChunkStorage (world): All chunks are saved
+[00:22:51] [Server thread/INFO]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[00:22:51] [Server thread/INFO]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[00:22:51] [Server thread/INFO]: ThreadedAnvilChunkStorage: All dimensions are saved
+[00:23:08] [User Authenticator #1/INFO]: UUID of player rexblaze is 20c583d9-4e38-4594-a311-079748bba282
+[00:23:09] [Server thread/INFO]: rexblaze[/192.168.1.1:53302] logged in with entity id 515 at (-121.7662188138894, 52.0, 70.41969829839698)
+[00:23:09] [Server thread/INFO]: Player [rexblaze] joined.
+[00:23:09] [Server thread/INFO]: rexblaze joined the game
+[00:23:15] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 2000ms or 40 ticks behind
+[00:23:32] [User Authenticator #2/INFO]: UUID of player hauntdcas is 297c7214-2334-4923-937a-82075afd60ce
+[00:23:33] [Server thread/INFO]: hauntdcas[/49.192.120.54:56571] logged in with entity id 4088 at (-106.00774495269506, 79.0, 55.30318574229793)
+[00:23:33] [Server thread/INFO]: Player [hauntdcas] joined.
+[00:23:33] [Server thread/INFO]: hauntdcas joined the game
+[00:23:46] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 15663ms or 313 ticks behind
+[00:24:20] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 18833ms or 376 ticks behind
+[00:24:47] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 12553ms or 251 ticks behind
+[00:25:13] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 11169ms or 223 ticks behind
+[00:25:39] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 10967ms or 219 ticks behind
+[00:26:07] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 13361ms or 267 ticks behind
+[00:26:40] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 17532ms or 350 ticks behind
+[00:27:11] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 16414ms or 328 ticks behind
+[00:27:43] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 16354ms or 327 ticks behind
+[00:27:45] [spark-worker-pool-1-thread-3/INFO]: [⚡] Stopping the profiler & uploading results, please wait...
+[00:27:46] [spark-worker-pool-1-thread-3/INFO]: If you see a warning above that says "WARNING: A Java agent has been loaded dynamically", it can be safely ignored.
+[00:27:46] [spark-worker-pool-1-thread-3/INFO]: See here for more information: https://spark.lucko.me/docs/misc/Java-agent-warning
+[00:27:50] [spark-worker-pool-1-thread-1/WARN]: A command execution has not completed after 5 seconds, it *might* be stuck. Trace: 
+  java.base/sun.nio.ch.Net.poll(Native Method)
+  java.base/sun.nio.ch.NioSocketImpl.park(Unknown Source)
+  java.base/sun.nio.ch.NioSocketImpl.park(Unknown Source)
+  java.base/sun.nio.ch.NioSocketImpl.implWrite(Unknown Source)
+  java.base/sun.nio.ch.NioSocketImpl.write(Unknown Source)
+  java.base/sun.nio.ch.NioSocketImpl$2.write(Unknown Source)
+  java.base/java.net.Socket$SocketOutputStream.implWrite(Unknown Source)
+  java.base/java.net.Socket$SocketOutputStream.write(Unknown Source)
+  java.base/sun.security.ssl.SSLSocketOutputRecord.deliver(Unknown Source)
+  java.base/sun.security.ssl.SSLSocketImpl$AppOutputStream.write(Unknown Source)
+  java.base/java.io.BufferedOutputStream.write(Unknown Source)
+  java.base/java.io.PrintStream.write(Unknown Source)
+  java.base/java.io.ByteArrayOutputStream.writeTo(Unknown Source)
+  java.base/sun.net.www.http.HttpClient.writeRequests(Unknown Source)
+  java.base/sun.net.www.http.HttpClient.writeRequests(Unknown Source)
+  java.base/sun.net.www.protocol.http.HttpURLConnection.writeRequests(Unknown Source)
+  java.base/sun.net.www.protocol.http.HttpURLConnection.getInputStream0(Unknown Source)
+  java.base/sun.net.www.protocol.http.HttpURLConnection.getInputStream(Unknown Source)
+  java.base/sun.net.www.protocol.http.HttpURLConnection.getHeaderField(Unknown Source)
+  java.base/sun.net.www.protocol.https.HttpsURLConnectionImpl.getHeaderField(Unknown Source)
+  knot//me.lucko.spark.common.util.BytebinClient.postContent(BytebinClient.java:72)
+  knot//me.lucko.spark.common.util.BytebinClient.postContent(BytebinClient.java:84)
+  knot//me.lucko.spark.common.util.BytebinClient.postContent(BytebinClient.java:94)
+  knot//me.lucko.spark.common.command.modules.SamplerModule.handleUpload(SamplerModule.java:427)
+  knot//me.lucko.spark.common.command.modules.SamplerModule.profilerStop(SamplerModule.java:406)
+  knot//me.lucko.spark.common.command.modules.SamplerModule.profiler(SamplerModule.java:141)
+  knot//me.lucko.spark.common.command.CommandManager.executeCommand0(CommandManager.java:244)
+  knot//me.lucko.spark.common.command.CommandManager.lambda$executeCommand$0(CommandManager.java:142)
+  java.base/java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+  java.base/java.util.concurrent.FutureTask.run(Unknown Source)
+  java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(Unknown Source)
+  java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+  java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+  java.base/java.lang.Thread.run(Unknown Source)
+[00:27:50] [spark-worker-pool-1-thread-1/WARN]: If the command subsequently completes without any errors, this warning should be ignored. :)
+[00:27:55] [spark-worker-pool-1-thread-1/WARN]: A command execution has not completed after 10 seconds, it *might* be stuck. Trace: 
+  java.base/sun.nio.ch.Net.poll(Native Method)
+  java.base/sun.nio.ch.NioSocketImpl.park(Unknown Source)
+  java.base/sun.nio.ch.NioSocketImpl.park(Unknown Source)
+  java.base/sun.nio.ch.NioSocketImpl.implWrite(Unknown Source)
+  java.base/sun.nio.ch.NioSocketImpl.write(Unknown Source)
+  java.base/sun.nio.ch.NioSocketImpl$2.write(Unknown Source)
+  java.base/java.net.Socket$SocketOutputStream.implWrite(Unknown Source)
+  java.base/java.net.Socket$SocketOutputStream.write(Unknown Source)
+  java.base/sun.security.ssl.SSLSocketOutputRecord.deliver(Unknown Source)
+  java.base/sun.security.ssl.SSLSocketImpl$AppOutputStream.write(Unknown Source)
+  java.base/java.io.BufferedOutputStream.write(Unknown Source)
+  java.base/java.io.PrintStream.write(Unknown Source)
+  java.base/java.io.ByteArrayOutputStream.writeTo(Unknown Source)
+  java.base/sun.net.www.http.HttpClient.writeRequests(Unknown Source)
+  java.base/sun.net.www.http.HttpClient.writeRequests(Unknown Source)
+  java.base/sun.net.www.protocol.http.HttpURLConnection.writeRequests(Unknown Source)
+  java.base/sun.net.www.protocol.http.HttpURLConnection.getInputStream0(Unknown Source)
+  java.base/sun.net.www.protocol.http.HttpURLConnection.getInputStream(Unknown Source)
+  java.base/sun.net.www.protocol.http.HttpURLConnection.getHeaderField(Unknown Source)
+  java.base/sun.net.www.protocol.https.HttpsURLConnectionImpl.getHeaderField(Unknown Source)
+  knot//me.lucko.spark.common.util.BytebinClient.postContent(BytebinClient.java:72)
+  knot//me.lucko.spark.common.util.BytebinClient.postContent(BytebinClient.java:84)
+  knot//me.lucko.spark.common.util.BytebinClient.postContent(BytebinClient.java:94)
+  knot//me.lucko.spark.common.command.modules.SamplerModule.handleUpload(SamplerModule.java:427)
+  knot//me.lucko.spark.common.command.modules.SamplerModule.profilerStop(SamplerModule.java:406)
+  knot//me.lucko.spark.common.command.modules.SamplerModule.profiler(SamplerModule.java:141)
+  knot//me.lucko.spark.common.command.CommandManager.executeCommand0(CommandManager.java:244)
+  knot//me.lucko.spark.common.command.CommandManager.lambda$executeCommand$0(CommandManager.java:142)
+  java.base/java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+  java.base/java.util.concurrent.FutureTask.run(Unknown Source)
+  java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(Unknown Source)
+  java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+  java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+  java.base/java.lang.Thread.run(Unknown Source)
+[00:27:55] [spark-worker-pool-1-thread-1/WARN]: If the command subsequently completes without any errors, this warning should be ignored. :)
+[00:28:00] [spark-worker-pool-1-thread-1/WARN]: A command execution has not completed after 15 seconds, it *might* be stuck. Trace: 
+  java.base/sun.nio.ch.Net.poll(Native Method)
+  java.base/sun.nio.ch.NioSocketImpl.park(Unknown Source)
+  java.base/sun.nio.ch.NioSocketImpl.park(Unknown Source)
+  java.base/sun.nio.ch.NioSocketImpl.implWrite(Unknown Source)
+  java.base/sun.nio.ch.NioSocketImpl.write(Unknown Source)
+  java.base/sun.nio.ch.NioSocketImpl$2.write(Unknown Source)
+  java.base/java.net.Socket$SocketOutputStream.implWrite(Unknown Source)
+  java.base/java.net.Socket$SocketOutputStream.write(Unknown Source)
+  java.base/sun.security.ssl.SSLSocketOutputRecord.deliver(Unknown Source)
+  java.base/sun.security.ssl.SSLSocketImpl$AppOutputStream.write(Unknown Source)
+  java.base/java.io.BufferedOutputStream.write(Unknown Source)
+  java.base/java.io.PrintStream.write(Unknown Source)
+  java.base/java.io.ByteArrayOutputStream.writeTo(Unknown Source)
+  java.base/sun.net.www.http.HttpClient.writeRequests(Unknown Source)
+  java.base/sun.net.www.http.HttpClient.writeRequests(Unknown Source)
+  java.base/sun.net.www.protocol.http.HttpURLConnection.writeRequests(Unknown Source)
+  java.base/sun.net.www.protocol.http.HttpURLConnection.getInputStream0(Unknown Source)
+  java.base/sun.net.www.protocol.http.HttpURLConnection.getInputStream(Unknown Source)
+  java.base/sun.net.www.protocol.http.HttpURLConnection.getHeaderField(Unknown Source)
+  java.base/sun.net.www.protocol.https.HttpsURLConnectionImpl.getHeaderField(Unknown Source)
+  knot//me.lucko.spark.common.util.BytebinClient.postContent(BytebinClient.java:72)
+  knot//me.lucko.spark.common.util.BytebinClient.postContent(BytebinClient.java:84)
+  knot//me.lucko.spark.common.util.BytebinClient.postContent(BytebinClient.java:94)
+  knot//me.lucko.spark.common.command.modules.SamplerModule.handleUpload(SamplerModule.java:427)
+  knot//me.lucko.spark.common.command.modules.SamplerModule.profilerStop(SamplerModule.java:406)
+  knot//me.lucko.spark.common.command.modules.SamplerModule.profiler(SamplerModule.java:141)
+  knot//me.lucko.spark.common.command.CommandManager.executeCommand0(CommandManager.java:244)
+  knot//me.lucko.spark.common.command.CommandManager.lambda$executeCommand$0(CommandManager.java:142)
+  java.base/java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+  java.base/java.util.concurrent.FutureTask.run(Unknown Source)
+  java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(Unknown Source)
+  java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+  java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+  java.base/java.lang.Thread.run(Unknown Source)
+[00:28:00] [spark-worker-pool-1-thread-1/WARN]: If the command subsequently completes without any errors, this warning should be ignored. :)
+[00:28:10] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 12109ms or 242 ticks behind
+[00:28:28] [spark-worker-pool-1-thread-3/INFO]: [⚡] Profiler stopped & upload complete!
+[00:28:28] [spark-worker-pool-1-thread-3/INFO]: https://spark.lucko.me/IOCYl9YA6X
+[00:28:28] [spark-worker-pool-1-thread-3/INFO]: [⚡] Restarted the background profiler. (If you don't want this to happen, run: /spark profiler cancel)
+[00:28:32] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 7035ms or 140 ticks behind
+[00:28:45] [spark-worker-pool-1-thread-2/INFO]: [⚡] Profiler has been cancelled.
+[00:28:55] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 8077ms or 161 ticks behind
+[00:29:25] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 14882ms or 297 ticks behind
+[00:29:58] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 17904ms or 358 ticks behind
+[00:30:30] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 16931ms or 338 ticks behind
+[00:31:06] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 21300ms or 426 ticks behind
+[00:31:45] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 24144ms or 482 ticks behind
+[00:32:23] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 23291ms or 465 ticks behind
+[00:33:02] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 24124ms or 482 ticks behind
+[00:33:41] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 23980ms or 479 ticks behind
+[00:34:18] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 22229ms or 444 ticks behind
+[00:34:55] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 22059ms or 441 ticks behind
+[00:35:33] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 22584ms or 451 ticks behind
+[00:36:11] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 22825ms or 456 ticks behind
+[00:36:48] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 22455ms or 449 ticks behind
+[00:37:22] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 19178ms or 383 ticks behind
+[00:37:56] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 18090ms or 361 ticks behind
+[00:38:08] [Server thread/WARN]: rexblaze moved too quickly! 2.408771631196629,-2.342118410415978,-17.76300050859154
+[00:38:29] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 18301ms or 366 ticks behind
+[00:39:02] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 17765ms or 355 ticks behind
+[00:39:31] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 14655ms or 293 ticks behind
+[00:39:59] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 12889ms or 257 ticks behind
+[00:40:27] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 12592ms or 251 ticks behind
+[00:40:51] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 8997ms or 179 ticks behind
+[00:44:32] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 2017ms or 40 ticks behind
+[00:44:55] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 7998ms or 159 ticks behind
+[00:45:22] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 12339ms or 246 ticks behind
+[00:45:38] [spark-worker-pool-1-thread-1/INFO]: [⚡] Creating a new heap dump summary, please wait...
+[00:45:39] [spark-worker-pool-1-thread-1/INFO]: [⚡] Heap dump summmary output:
+[00:45:39] [spark-worker-pool-1-thread-1/INFO]: https://spark.lucko.me/vnacrIUdBn
+[00:45:50] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 12310ms or 246 ticks behind
+[00:46:16] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 10935ms or 218 ticks behind
+[00:46:41] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 10492ms or 209 ticks behind
+[00:47:13] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 16993ms or 339 ticks behind
+[00:47:47] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 19566ms or 391 ticks behind
+[00:48:21] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 19008ms or 380 ticks behind
+[00:48:55] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 18998ms or 379 ticks behind
+[00:49:29] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 18859ms or 377 ticks behind
+[00:50:04] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 19931ms or 398 ticks behind
+[00:50:39] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 19568ms or 391 ticks behind
+[00:51:13] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 19669ms or 393 ticks behind
+[00:51:17] [Server thread/INFO]: [rexblaze: Teleported rexblaze to Chicken]
+[00:51:48] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 19735ms or 394 ticks behind
+[00:52:22] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 19420ms or 388 ticks behind
+[00:52:56] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 19003ms or 380 ticks behind
+[00:53:30] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 18706ms or 374 ticks behind
+[00:54:03] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 17936ms or 358 ticks behind
+[00:54:36] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 17749ms or 354 ticks behind
+[00:55:09] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 18207ms or 364 ticks behind
+[00:55:42] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 18397ms or 367 ticks behind
+[00:55:48] [Server thread/INFO]: [rexblaze: Added tag 'lag' to 1856 entities]
+[00:56:15] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 17716ms or 354 ticks behind
+[00:56:49] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 18562ms or 371 ticks behind
+[00:57:16] [Server thread/INFO]: [rexblaze: Removed tag 'lag' from 1856 entities]
+[00:57:22] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 18450ms or 369 ticks behind
+[00:57:34] [Server thread/INFO]: [rexblaze: Added tag 'lag' to Chicken]
+[00:57:41] [Server thread/INFO]: [rexblaze: Added tag 'lag' to 1123 entities]
+[00:57:55] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 18111ms or 362 ticks behind
+[00:58:29] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 18432ms or 368 ticks behind
+[00:58:42] [Server thread/INFO]: [rexblaze: Applied effect Glowing to 1123 targets]
+[00:59:03] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 19554ms or 391 ticks behind
+[00:59:37] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 18890ms or 377 ticks behind
+[01:00:06] [Server thread/INFO]: [rexblaze: Teleported rexblaze to Chicken]
+[01:00:11] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 19100ms or 382 ticks behind
+[01:00:47] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 21129ms or 422 ticks behind
+[01:00:52] [Netty Epoll IO #4/INFO]: Player [rexblaze] disconnected.
+[01:00:52] [Server thread/INFO]: rexblaze lost connection: Disconnected
+[01:00:52] [Server thread/INFO]: rexblaze left the game
+[01:01:16] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 13840ms or 276 ticks behind
+[01:01:42] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 11061ms or 221 ticks behind
+[01:02:08] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 10867ms or 217 ticks behind
+[01:02:11] [User Authenticator #3/INFO]: UUID of player rexblaze is 20c583d9-4e38-4594-a311-079748bba282
+[01:02:12] [Server thread/INFO]: rexblaze[/192.168.1.1:63426] logged in with entity id 19779 at (10.370079809653518, 4.0, 1.6222760033653614)
+[01:02:12] [Server thread/INFO]: Player [rexblaze] joined.
+[01:02:12] [Server thread/INFO]: rexblaze joined the game
+[01:02:38] [Netty Epoll IO #7/INFO]: Player [hauntdcas] disconnected.
+[01:02:38] [Server thread/INFO]: hauntdcas lost connection: Disconnected
+[01:02:38] [Server thread/INFO]: hauntdcas left the game
+[01:02:42] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 19604ms or 392 ticks behind
+[01:03:16] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 18835ms or 376 ticks behind
+[01:03:42] [Server thread/INFO]: [rexblaze: Killed 329 entities]
+[01:03:50] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 19081ms or 381 ticks behind
+[01:03:55] [Server thread/INFO]: [rexblaze: Killed 65 entities]
+[01:03:59] [Server thread/INFO]: [rexblaze: Killed 36 entities]
+[01:04:09] [Server thread/INFO]: [rexblaze: Killed 220 entities]
+[01:04:15] [Server thread/INFO]: [rexblaze: Killed 321 entities]
+[01:04:21] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 15412ms or 308 ticks behind
+[01:04:21] [Server thread/INFO]: [rexblaze: Killed 321 entities]
+[01:04:26] [Server thread/INFO]: [rexblaze: Killed 304 entities]
+[01:04:29] [Server thread/INFO]: [rexblaze: Killed 185 entities]
+[01:04:33] [Server thread/INFO]: [rexblaze: Killed 159 entities]
+[01:06:47] [Server thread/INFO]: [rexblaze: Killed 206 entities]
+[01:06:51] [Server thread/INFO]: [rexblaze: Killed 39 entities]
+[01:06:53] [Server thread/INFO]: [rexblaze: Killed 2 entities]
+[01:06:58] [Server thread/INFO]: [rexblaze: Killed 153 entities]
+[01:07:01] [Server thread/INFO]: [rexblaze: Killed 173 entities]
+[01:07:03] [Server thread/INFO]: [rexblaze: Killed 130 entities]
+[01:07:05] [Server thread/INFO]: [rexblaze: Killed 23 entities]
+[01:22:52] [Netty Epoll IO #0/INFO]: Player [rexblaze] disconnected.
+[01:22:52] [Server thread/INFO]: rexblaze lost connection: Disconnected
+[01:22:52] [Server thread/INFO]: rexblaze left the game
+[01:22:57] [RCON Listener #1/INFO]: Thread RCON Client /172.18.0.3 started
+[01:22:57] [RCON Client /172.18.0.3 #2/INFO]: Thread RCON Client /172.18.0.3 shutting down
+[01:22:57] [RCON Listener #1/INFO]: Thread RCON Client /172.18.0.3 started
+[01:22:57] [Server thread/INFO]: [Rcon: Automatic saving is now disabled]
+[01:22:57] [RCON Client /172.18.0.3 #3/INFO]: Thread RCON Client /172.18.0.3 shutting down
+[01:22:57] [RCON Listener #1/INFO]: Thread RCON Client /172.18.0.3 started
+[01:23:00] [Server thread/INFO]: ThreadedAnvilChunkStorage (world): All chunks are saved
+[01:23:00] [Server thread/INFO]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[01:23:00] [Server thread/INFO]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[01:23:00] [Server thread/INFO]: ThreadedAnvilChunkStorage: All dimensions are saved
+[01:23:00] [Server thread/INFO]: [Rcon: Saved the game]
+[01:23:00] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 3138ms or 62 ticks behind
+[01:23:00] [RCON Client /172.18.0.3 #4/INFO]: Thread RCON Client /172.18.0.3 shutting down
+[01:23:55] [Server thread/INFO]: Server empty for 60 seconds, pausing
+[01:27:23] [RCON Listener #1/INFO]: Thread RCON Client /172.18.0.3 started
+[01:27:23] [Server thread/INFO]: [Rcon: Automatic saving is now enabled]
+[01:27:23] [RCON Client /172.18.0.3 #5/INFO]: Thread RCON Client /172.18.0.3 shutting down
+[10:04:25] [User Authenticator #4/INFO]: UUID of player DrPoopper is f91ae361-bd65-455d-9b68-ea7fc2956f3d
+[10:04:26] [Server thread/INFO]: DrPoopper[/112.213.239.254:61364] logged in with entity id 30306 at (-957.8542925157951, 64.0, -1214.7598610227406)
+[10:04:26] [Server thread/INFO]: Player [DrPoopper] joined.
+[10:04:26] [Server thread/INFO]: DrPoopper joined the game
+[10:04:52] [Server thread/INFO]: Player [DrPoopper] disconnected.
+[10:04:52] [Server thread/INFO]: DrPoopper lost connection: Disconnected
+[10:04:52] [Server thread/INFO]: DrPoopper left the game
+[10:05:02] [User Authenticator #5/INFO]: UUID of player DrPoopper is f91ae361-bd65-455d-9b68-ea7fc2956f3d
+[10:05:02] [Server thread/INFO]: DrPoopper[/112.213.239.254:61193] logged in with entity id 31063 at (-957.8542925157951, 64.0, -1214.7598610227406)
+[10:05:02] [Server thread/INFO]: Player [DrPoopper] joined.
+[10:05:02] [Server thread/INFO]: DrPoopper joined the game
+[10:09:56] [Netty Epoll IO #2/INFO]: Player [DrPoopper] disconnected.
+[10:09:56] [Server thread/INFO]: DrPoopper lost connection: Disconnected
+[10:09:56] [Server thread/INFO]: DrPoopper left the game
+[10:10:56] [Server thread/INFO]: Server empty for 60 seconds, pausing
+[10:19:54] [User Authenticator #6/INFO]: UUID of player DrPoopper is f91ae361-bd65-455d-9b68-ea7fc2956f3d
+[10:19:55] [Server thread/INFO]: DrPoopper[/112.213.239.254:61125] logged in with entity id 33640 at (-148.5, 69.0, -1578.5)
+[10:19:55] [Server thread/INFO]: Player [DrPoopper] joined.
+[10:19:55] [Server thread/INFO]: DrPoopper joined the game
+[10:20:36] [Netty Epoll IO #7/INFO]: Player [DrPoopper] disconnected.
+[10:20:36] [Server thread/INFO]: DrPoopper lost connection: Disconnected
+[10:20:36] [Server thread/INFO]: DrPoopper left the game
+[10:20:44] [User Authenticator #7/INFO]: UUID of player DrPoopper is f91ae361-bd65-455d-9b68-ea7fc2956f3d
+[10:20:44] [Server thread/INFO]: DrPoopper[/112.213.239.254:60975] logged in with entity id 34486 at (-148.5, 69.0, -1578.5)
+[10:20:44] [Server thread/INFO]: Player [DrPoopper] joined.
+[10:20:44] [Server thread/INFO]: DrPoopper joined the game
+[10:44:59] [Server thread/INFO]: Player [DrPoopper] changed level: [rtiddq61hjlr4@minecraft:overworld] -> [rtiddq61hjlr4@minecraft:the_nether].
+[10:45:27] [Server thread/INFO]: Player [DrPoopper] changed level: [rtiddq61hjlr4@minecraft:the_nether] -> [rtiddq61hjlr4@minecraft:overworld].
+[11:15:13] [Server thread/INFO]: Player [DrPoopper] changed level: [rtiddq61hjlr4@minecraft:overworld] -> [rtiddq61hjlr4@minecraft:the_nether].
+[11:15:44] [Server thread/INFO]: Player [DrPoopper] changed level: [rtiddq61hjlr4@minecraft:the_nether] -> [rtiddq61hjlr4@minecraft:overworld].
+[12:07:24] [RCON Listener #1/INFO]: Thread RCON Client /172.18.0.3 started
+[12:07:24] [RCON Client /172.18.0.3 #6/INFO]: Thread RCON Client /172.18.0.3 shutting down
+[12:07:24] [RCON Listener #1/INFO]: Thread RCON Client /172.18.0.3 started
+[12:07:24] [Server thread/INFO]: [Rcon: Automatic saving is now disabled]
+[12:07:24] [RCON Client /172.18.0.3 #7/INFO]: Thread RCON Client /172.18.0.3 shutting down
+[12:07:24] [RCON Listener #1/INFO]: Thread RCON Client /172.18.0.3 started
+[12:07:33] [Server thread/INFO]: ThreadedAnvilChunkStorage (world): All chunks are saved
+[12:07:33] [Server thread/INFO]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[12:07:33] [Server thread/INFO]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[12:07:33] [Server thread/INFO]: ThreadedAnvilChunkStorage: All dimensions are saved
+[12:07:33] [Server thread/INFO]: [Rcon: Saved the game]
+[12:07:33] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 8507ms or 170 ticks behind
+[12:07:33] [RCON Client /172.18.0.3 #8/INFO]: Thread RCON Client /172.18.0.3 shutting down
+[12:11:57] [RCON Listener #1/INFO]: Thread RCON Client /172.18.0.3 started
+[12:11:57] [Server thread/INFO]: [Rcon: Automatic saving is now enabled]
+[12:11:57] [RCON Client /172.18.0.3 #9/INFO]: Thread RCON Client /172.18.0.3 shutting down
+[12:27:23] [Netty Epoll IO #11/INFO]: Player [DrPoopper] disconnected.
+[12:27:23] [Server thread/INFO]: DrPoopper lost connection: Disconnected
+[12:27:23] [Server thread/INFO]: DrPoopper left the game
+[12:28:13] [User Authenticator #8/INFO]: UUID of player DrPoopper is f91ae361-bd65-455d-9b68-ea7fc2956f3d
+[12:28:13] [Server thread/INFO]: DrPoopper[/112.213.239.254:61405] logged in with entity id 74560 at (-50.69015671867636, 78.0, 85.1355712411177)
+[12:28:13] [Server thread/INFO]: Player [DrPoopper] joined.
+[12:28:13] [Server thread/INFO]: DrPoopper joined the game
+[12:28:25] [Netty Epoll IO #2/INFO]: Player [DrPoopper] disconnected.
+[12:28:26] [Server thread/INFO]: DrPoopper lost connection: Disconnected
+[12:28:26] [Server thread/INFO]: DrPoopper left the game
+[12:28:28] [User Authenticator #9/INFO]: UUID of player DrPoopper is f91ae361-bd65-455d-9b68-ea7fc2956f3d
+[12:28:29] [Server thread/INFO]: DrPoopper[/112.213.239.254:61079] logged in with entity id 76350 at (-50.69015671867636, 78.0, 85.1355712411177)
+[12:28:29] [Server thread/INFO]: Player [DrPoopper] joined.
+[12:28:29] [Server thread/INFO]: DrPoopper joined the game
+[12:57:38] [Netty Epoll IO #5/INFO]: Player [DrPoopper] disconnected.
+[12:57:38] [Server thread/INFO]: DrPoopper lost connection: Disconnected
+[12:57:38] [Server thread/INFO]: DrPoopper left the game
+[12:58:38] [Server thread/INFO]: Server empty for 60 seconds, pausing
+[13:53:44] [User Authenticator #10/INFO]: UUID of player Lumenesce is 6bebc6db-468e-4027-8938-07eb20eabcec
+[13:53:45] [Server thread/INFO]: Lumenesce[/125.63.9.10:41526] logged in with entity id 86612 at (-93.23415240513943, 55.0, -954.5359385376621)
+[13:53:45] [Server thread/INFO]: Player [Lumenesce] joined.
+[13:53:45] [Server thread/INFO]: Lumenesce joined the game
+[13:53:47] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 2133ms or 42 ticks behind
+[13:54:46] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 43515ms or 870 ticks behind
+[13:55:10] [Netty Epoll IO #7/INFO]: Player [Lumenesce] disconnected.
+[13:55:10] [Server thread/INFO]: Lumenesce lost connection: Disconnected
+[13:55:10] [Server thread/INFO]: Lumenesce left the game
+[13:55:11] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 10624ms or 212 ticks behind
+[13:55:17] [User Authenticator #11/INFO]: UUID of player Lumenesce is 6bebc6db-468e-4027-8938-07eb20eabcec
+[13:55:17] [Server thread/INFO]: Lumenesce[/125.63.9.10:41590] logged in with entity id 89190 at (-92.73413117628593, 55.0, -954.8446272663622)
+[13:55:17] [Server thread/INFO]: Player [Lumenesce] joined.
+[13:55:17] [Server thread/INFO]: Lumenesce joined the game
+[13:55:53] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 26397ms or 527 ticks behind
+[13:56:45] [Netty Epoll IO #13/INFO]: Player [Lumenesce] disconnected.
+[13:56:45] [Server thread/INFO]: Lumenesce lost connection: Disconnected
+[13:56:45] [Server thread/INFO]: Lumenesce left the game
+[13:56:46] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 38153ms or 763 ticks behind
+[13:57:44] [Server thread/INFO]: Server empty for 60 seconds, pausing
