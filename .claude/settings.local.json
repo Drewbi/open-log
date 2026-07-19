@@ -24,7 +24,8 @@
       "mcp__playwright__browser_tabs",
       "mcp__playwright__browser_fill_form",
       "PowerShell(pnpm typecheck *)",
-      "PowerShell(nvm list *)"
+      "PowerShell(nvm list *)",
+      "PowerShell(pnpm *)"
     ],
     "ask": [
       "Bash(rm *)",

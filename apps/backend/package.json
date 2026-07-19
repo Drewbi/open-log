@@ -9,6 +9,7 @@
     "start": "tsx src/index.ts",
     "typecheck": "tsc --noEmit",
     "backfill": "tsx src/scripts/backfill.ts",
+    "reprocess": "tsx src/scripts/reprocess.ts",
     "hash-password": "tsx src/scripts/hash-password.ts"
   },
   "dependencies": {

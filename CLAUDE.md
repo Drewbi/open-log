@@ -20,6 +20,7 @@ pnpm typecheck                  # tsc --noEmit across all packages (no test suit
 pnpm build                      # production frontend build only (see "No backend build step" below)
 
 pnpm --filter @open-log/backend backfill        # one-off: re-scan MC_LOGS_DIR into SQLite, print counts
+pnpm --filter @open-log/backend reprocess       # rebuild events from stored raw_lines under current rules (see "Rule engine")
 pnpm --filter @open-log/backend hash-password <pw>  # generate AUTH_PASSWORD_HASH for .env
 ```
 
@@ -53,11 +54,11 @@ Per-line order of operations matters and is easy to get backwards:
 
 `timestamp.ts`'s `DayClock` reconstructs absolute dates from `latest.log`'s bare `HH:mm:ss` lines (no date in the file) by seeding from the rotated filename's embedded date or the previous checkpoint's last timestamp, and rolling the date forward when the clock appears to go backwards (midnight rollover).
 
-There is no "wake" log line in itzg's autopause output (confirmed against real server logs — only `Server empty for N seconds, pausing` appears in the file log, no corresponding resume message). `fileWatcher.ts` instead synthesizes a `wake` event at the next `join` seen after a `sleep`, tracked via `IngestState.isAsleep`.
+There is no "wake" log line in itzg's autopause output (confirmed against real server logs — only `Server empty for N seconds, pausing` appears in the file log, no corresponding resume message), so only `sleep` events exist. A synthesized `wake` event (emitted at the next `join` after a `sleep`) existed at one point but was dropped; old DBs may still contain `wake` rows, which `TimelinePanel.tsx` tolerates when reading `TYPE_TRACK`.
 
 ### Rule engine (`apps/backend/src/rules/`)
 
-Every ingested line is stored in `raw_lines` unconditionally; matching a rule only controls whether a POI `events` row is also created. Rules are plain JSON (`config/rules.default.json`, merged with an optional `config/rules.custom.json`) — regex pattern, event type, POI flag, severity, confidence, summary template — specifically so new patterns (e.g. a modded death message) can be added without touching pipeline code. Since this is a modded (Forge/Fabric) server, death messages aren't a fixed vanilla set: there's a curated list of known phrases plus a last-resort fallback rule (`requiresKnownActor: true`, tried only if nothing else matched) that treats any bare `Name message` broadcast from a previously-seen player as a heuristic death. Rules that exist purely to suppress false positives on that fallback (e.g. `lost_connection`, `anticheat_moved_too_quickly`) are marked `isPOI: false` — their `eventType` value is otherwise unused/arbitrary.
+Every ingested line is stored in `raw_lines` unconditionally; matching a rule only controls whether a POI `events` row is also created. Because `events` is fully derived from `raw_lines`, rule changes can be applied to already-ingested history without touching log files: `scripts/reprocess.ts` deletes events (bounded by the max `raw_lines.id` at start, so a concurrently running server ingesting new lines is never double-processed) and replays stored lines through the current rule set in `id` order, which rebuilds `knownActors` identically to the original ingest. In the Docker deployment: edit `config/rules.custom.json`, `docker compose restart open-log` (rules load at startup), then `docker compose exec open-log pnpm reprocess`. Rules are plain JSON (`config/rules.default.json`, merged with an optional `config/rules.custom.json`) — regex pattern, event type, POI flag, severity, confidence, summary template — specifically so new patterns (e.g. a modded death message) can be added without touching pipeline code. Since this is a modded (Forge/Fabric) server, death messages aren't a fixed vanilla set: there's a curated list of known phrases plus a last-resort fallback rule (`requiresKnownActor: true`, tried only if nothing else matched) that treats any bare `Name message` broadcast from a previously-seen player as a heuristic death. Rules that exist purely to suppress false positives on that fallback (e.g. `lost_connection`, `anticheat_moved_too_quickly`) are marked `isPOI: false` — their `eventType` value is otherwise unused/arbitrary.
 
 ### Data model (`apps/backend/src/db/`)
 
