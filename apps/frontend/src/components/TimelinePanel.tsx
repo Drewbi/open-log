@@ -9,6 +9,11 @@ import { CRITICAL_COLOR, EVENT_COLORS } from "@/lib/eventColors";
 import { useTimelineStore } from "@/store/timelineStore";
 
 const DAY_MS = 24 * 60 * 60 * 1000;
+// Window applied when the log viewer asks the timeline to focus on a
+// timestamp (e.g. clicking a log line). Never zooms out past whatever the
+// user is already looking at — see the focusRequest effect below — but
+// this is the ceiling: about a screenful of context around the instant.
+const FOCUS_SPAN_MS = 60 * 60 * 1000;
 const CHIP = 7; // half-size of a normal marker chip, in px
 const COMMAND_HALF = CHIP + 2; // half-size of an ops-track marker chip
 const MARKER_W = 18; // footprint used for lane-collision spacing
@@ -45,6 +50,7 @@ const TYPE_TRACK: Record<EventType, TrackId> = {
   server_stop: "server",
   join: "players",
   leave: "players",
+  chat: "players",
   death: "players",
 };
 
@@ -149,6 +155,17 @@ function drawGlyph(ctx: CanvasRenderingContext2D, type: EventType, s: number, ma
       ctx.lineTo(s * 0.2, s * 0.5);
       ctx.stroke();
       return;
+    case "chat": // speech bubble with a small tail — cut out
+      ctx.moveTo(-s * 0.6, -s * 0.45);
+      ctx.lineTo(s * 0.6, -s * 0.45);
+      ctx.lineTo(s * 0.6, s * 0.2);
+      ctx.lineTo(-s * 0.1, s * 0.2);
+      ctx.lineTo(-s * 0.25, s * 0.55);
+      ctx.lineTo(-s * 0.25, s * 0.2);
+      ctx.lineTo(-s * 0.6, s * 0.2);
+      ctx.closePath();
+      ctx.fill();
+      return;
     case "leave": // arrow flying out away from an open door bracket on the
       // left — mirrors lucide's LogOut, both cut out
       ctx.moveTo(s * 0.35, -s * 0.3);
@@ -220,6 +237,20 @@ function drawGlyph(ctx: CanvasRenderingContext2D, type: EventType, s: number, ma
   }
 }
 
+// Builds the d3-zoom transform that makes `scale.rescaleX(baseScale)` cover
+// exactly [from, to]. Derived from baseScale's time domain directly (rather
+// than subtracting baseScale-projected pixel positions, as this file used to)
+// because baseScale spans a full year: a narrow focus window (e.g. one hour)
+// projects to a sub-pixel delta in that pixel space, and subtracting two
+// nearly-equal pixel values loses the precision needed to zoom in tightly.
+function domainToTransform(scale: ScaleTime<number, number>, width: number, from: number, to: number): ZoomTransform {
+  const [domainStartMs, domainEndMs] = scale.domain().map((d) => d.getTime());
+  const k = (domainEndMs - domainStartMs) / Math.max(1, to - from);
+  const gutterPx = scale.range()[0];
+  const tx = gutterPx / k - scale(from);
+  return zoomIdentity.scale(k).translate(tx, 0);
+}
+
 export function TimelinePanel() {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -227,6 +258,7 @@ export function TimelinePanel() {
   const zoomBehaviorRef = useRef<ZoomBehavior<HTMLCanvasElement, unknown> | null>(null);
   const markersRef = useRef<DrawnMarker[]>([]);
   const fetchTimeoutRef = useRef<ReturnType<typeof setTimeout>>();
+  const appliedFocusRequestId = useRef<number | null>(null);
   const nowRef = useRef(Date.now());
   // Logical visible domain, independent of pixel width — the source of truth
   // for re-deriving the zoom transform whenever the container is resized (a
@@ -241,6 +273,7 @@ export function TimelinePanel() {
   const selectEvent = useTimelineStore((s) => s.selectEvent);
   const selectedEventId = useTimelineStore((s) => s.selectedEventId);
   const playheadTsMs = useTimelineStore((s) => s.playheadTsMs);
+  const focusRequest = useTimelineStore((s) => s.focusRequest);
   const setVisibleTimeRange = useTimelineStore((s) => s.setVisibleTimeRange);
   const activeFilters = useTimelineStore((s) => s.activeFilters);
   const typesParam = activeFilters.size > 0 ? Array.from(activeFilters).join(",") : undefined;
@@ -553,10 +586,7 @@ export function TimelinePanel() {
     // whenever `width` changes, and a transform calibrated for the old range
     // maps to the wrong dates under the new one.
     const [domainFrom, domainTo] = visibleDomainRef.current;
-    const x0 = baseScale(domainFrom);
-    const x1 = baseScale(domainTo);
-    const k = width / Math.max(1, x1 - x0);
-    const transform = zoomIdentity.scale(k).translate(-x0, 0);
+    const transform = domainToTransform(baseScale, width, domainFrom, domainTo);
     selection.call(behavior.transform, transform);
 
     return () => {
@@ -564,6 +594,27 @@ export function TimelinePanel() {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [baseScale, width]);
+
+  // Pan/zoom to a specific instant on request (e.g. clicking a log line).
+  // Guarded by requestId so this only fires for a genuinely new request —
+  // not on every resize/baseScale change while a stale focusRequest is still
+  // the latest one in the store. Never zooms out past the user's current
+  // view: the applied span is capped at FOCUS_SPAN_MS but shrinks to match
+  // whatever's already narrower, so a tightly-zoomed user just gets panned.
+  useEffect(() => {
+    if (!focusRequest || focusRequest.requestId === appliedFocusRequestId.current) return;
+    const canvas = canvasRef.current;
+    const behavior = zoomBehaviorRef.current;
+    if (!canvas || !behavior) return;
+    appliedFocusRequestId.current = focusRequest.requestId;
+
+    const currentSpan = visibleDomainRef.current[1] - visibleDomainRef.current[0];
+    const span = Math.min(currentSpan, FOCUS_SPAN_MS);
+    const from = focusRequest.tsMs - span / 2;
+    const to = focusRequest.tsMs + span / 2;
+    const transform = domainToTransform(baseScale, width, from, to);
+    select(canvas).call(behavior.transform, transform);
+  }, [focusRequest, baseScale, width]);
 
   // Redraw (without touching zoom state) whenever new event data arrives.
   useEffect(() => {

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useVirtualizer } from "@tanstack/react-virtual";
+import type { RawLine } from "@mc-log-timeline/shared-types";
 import { fetchRawLines } from "@/api/client";
 import { Switch } from "@/components/ui/switch";
 import { cn } from "@/lib/utils";
@@ -22,11 +23,16 @@ export function LogViewerPanel() {
   const setLiveTailEnabled = useTimelineStore((s) => s.setLiveTailEnabled);
   const returnToLiveTail = useTimelineStore((s) => s.returnToLiveTail);
   const setPlayheadTsMs = useTimelineStore((s) => s.setPlayheadTsMs);
+  const focusOnTimestamp = useTimelineStore((s) => s.focusOnTimestamp);
   const parentRef = useRef<HTMLDivElement>(null);
   const hasScrolledForJump = useRef<number | null>(null);
   const isAtBottomRef = useRef(true);
   const [isAtBottom, setIsAtBottom] = useState(true);
   const [hoveredLineId, setHoveredLineId] = useState<number | null>(null);
+  // Sticks after a click (unlike hover, which clears on mouse-leave) so the
+  // clicked line stays highlighted and keeps driving the playhead/timeline
+  // focus until another line is hovered or clicked.
+  const [clickedLineId, setClickedLineId] = useState<number | null>(null);
 
   const isTailMode = jumpToRawLineId === null;
 
@@ -41,15 +47,25 @@ export function LogViewerPanel() {
   const lines = data?.lines ?? [];
 
   // Drives the timeline's video-editor-style playhead: while actively
-  // hovering a line, show its position; otherwise fall back to whatever's
-  // selected (e.g. via a timeline-marker click or search result).
+  // hovering a line, show its position; otherwise fall back to a clicked
+  // line (sticky), then to whatever's selected (e.g. via a timeline-marker
+  // click or search result).
   useEffect(() => {
     const hovered = hoveredLineId !== null ? lines.find((l) => l.id === hoveredLineId) : undefined;
+    const clicked = clickedLineId !== null ? lines.find((l) => l.id === clickedLineId) : undefined;
     const selected = jumpToRawLineId !== null ? lines.find((l) => l.id === jumpToRawLineId) : undefined;
-    setPlayheadTsMs(hovered?.tsMs ?? selected?.tsMs ?? null);
-  }, [hoveredLineId, jumpToRawLineId, lines, setPlayheadTsMs]);
+    setPlayheadTsMs(hovered?.tsMs ?? clicked?.tsMs ?? selected?.tsMs ?? null);
+  }, [hoveredLineId, clickedLineId, jumpToRawLineId, lines, setPlayheadTsMs]);
 
   useEffect(() => () => setPlayheadTsMs(null), [setPlayheadTsMs]);
+
+  // Clicking a log line pins the playhead there and asks the timeline to
+  // pan/zoom to that instant — the mirror of clicking a timeline marker,
+  // which jumps the log viewer to a raw line.
+  const handleLineClick = (line: RawLine) => {
+    setClickedLineId(line.id);
+    focusOnTimestamp(line.tsMs);
+  };
 
   const virtualizer = useVirtualizer({
     count: lines.length,
@@ -129,7 +145,7 @@ export function LogViewerPanel() {
         <div style={{ height: virtualizer.getTotalSize(), position: "relative", width: "100%" }}>
           {virtualizer.getVirtualItems().map((virtualRow) => {
             const line = lines[virtualRow.index];
-            const isHighlighted = line.id === jumpToRawLineId;
+            const isHighlighted = line.id === jumpToRawLineId || line.id === clickedLineId;
             return (
               <div
                 key={line.id}
@@ -137,6 +153,7 @@ export function LogViewerPanel() {
                 ref={virtualizer.measureElement}
                 onMouseEnter={() => setHoveredLineId(line.id)}
                 onMouseLeave={() => setHoveredLineId((id) => (id === line.id ? null : id))}
+                onClick={() => handleLineClick(line)}
                 style={{
                   position: "absolute",
                   top: 0,
@@ -145,7 +162,7 @@ export function LogViewerPanel() {
                   transform: `translateY(${virtualRow.start}px)`,
                 }}
                 className={cn(
-                  "flex gap-3 whitespace-pre-wrap break-all border-l-2 border-transparent px-3 py-0.5",
+                  "flex cursor-pointer gap-3 whitespace-pre-wrap break-all border-l-2 border-transparent px-3 py-0.5 hover:bg-accent/40",
                   levelClass(line.level),
                   isHighlighted && "border-primary bg-primary/10",
                 )}

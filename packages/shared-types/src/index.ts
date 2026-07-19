@@ -3,6 +3,7 @@ import { z } from "zod";
 export const EventType = z.enum([
   "join",
   "leave",
+  "chat",
   "death",
   "command",
   "server_start",

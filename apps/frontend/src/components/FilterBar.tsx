@@ -1,5 +1,5 @@
 import type { CSSProperties } from "react";
-import { LogIn, LogOut, Moon, Power, Skull, Terminal, TriangleAlert } from "lucide-react";
+import { LogIn, LogOut, MessageSquare, Moon, Power, Skull, Terminal, TriangleAlert } from "lucide-react";
 import type { EventType } from "@mc-log-timeline/shared-types";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { EVENT_COLORS } from "@/lib/eventColors";
@@ -8,6 +8,7 @@ import { useTimelineStore } from "@/store/timelineStore";
 const TYPE_META: Array<{ type: EventType; label: string; icon: typeof LogIn }> = [
   { type: "join", label: "Join", icon: LogIn },
   { type: "leave", label: "Leave", icon: LogOut },
+  { type: "chat", label: "Chat", icon: MessageSquare },
   { type: "death", label: "Death", icon: Skull },
   { type: "command", label: "Command", icon: Terminal },
   { type: "sleep", label: "Sleep", icon: Moon },

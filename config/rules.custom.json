@@ -1,1 +1,12 @@
-[]
+[
+  {
+    "id": "chat",
+    "pattern": "^<(?<actor>[A-Za-z0-9_]+)> (?<target>.+)$",
+    "eventType": "chat",
+    "isPOI": true,
+    "priority": 100,
+    "confidence": "confirmed",
+    "severity": "normal",
+    "summaryTemplate": "{actor}: {target}"
+  }
+]
