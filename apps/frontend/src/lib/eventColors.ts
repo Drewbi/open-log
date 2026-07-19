@@ -1,4 +1,4 @@
-import type { EventType } from "@mc-log-timeline/shared-types";
+import type { EventType } from "@open-log/shared-types";
 
 // One distinct color per event type (not just a severity channel) so markers
 // are identifiable by color alone, in addition to their glyph shape. Command

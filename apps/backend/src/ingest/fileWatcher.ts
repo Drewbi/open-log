@@ -3,7 +3,7 @@ import fs from "node:fs";
 import path from "node:path";
 import zlib from "node:zlib";
 import chokidar from "chokidar";
-import type { EventType } from "@mc-log-timeline/shared-types";
+import type { EventType } from "@open-log/shared-types";
 import { config } from "../config.js";
 import {
   getCheckpoint,

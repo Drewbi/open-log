@@ -1,5 +1,5 @@
 {
-  "name": "@mc-log-timeline/backend",
+  "name": "@open-log/backend",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -12,7 +12,7 @@
     "hash-password": "tsx src/scripts/hash-password.ts"
   },
   "dependencies": {
-    "@mc-log-timeline/shared-types": "workspace:*",
+    "@open-log/shared-types": "workspace:*",
     "argon2": "^0.40.3",
     "better-sqlite3": "^11.3.0",
     "chokidar": "^3.6.0",

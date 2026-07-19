@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { useQueryClient } from "@tanstack/react-query";
-import type { RawLine, StreamMessage } from "@mc-log-timeline/shared-types";
+import type { RawLine, StreamMessage } from "@open-log/shared-types";
 import { useTimelineStore } from "@/store/timelineStore";
 
 const MAX_TAIL_LINES = 1000;

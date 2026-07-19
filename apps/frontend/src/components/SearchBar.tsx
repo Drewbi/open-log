@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Search } from "lucide-react";
-import type { RawLine } from "@mc-log-timeline/shared-types";
+import type { RawLine } from "@open-log/shared-types";
 import { searchRawLines } from "@/api/client";
 import { Input } from "@/components/ui/input";
 import { useTimelineStore } from "@/store/timelineStore";

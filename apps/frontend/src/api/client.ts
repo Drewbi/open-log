@@ -1,4 +1,4 @@
-import type { RawLine, TimelineEvent } from "@mc-log-timeline/shared-types";
+import type { RawLine, TimelineEvent } from "@open-log/shared-types";
 
 async function getJson<T>(path: string, params?: Record<string, string | number | undefined>): Promise<T> {
   const url = new URL(path, window.location.origin);

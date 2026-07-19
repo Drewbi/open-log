@@ -1,5 +1,5 @@
 {
-  "name": "@mc-log-timeline/shared-types",
+  "name": "@open-log/shared-types",
   "version": "0.0.0",
   "private": true,
   "type": "module",

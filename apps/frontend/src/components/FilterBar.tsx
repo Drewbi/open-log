@@ -1,6 +1,6 @@
 import type { CSSProperties } from "react";
 import { LogIn, LogOut, MessageSquare, Moon, Power, Skull, Terminal, TriangleAlert } from "lucide-react";
-import type { EventType } from "@mc-log-timeline/shared-types";
+import type { EventType } from "@open-log/shared-types";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { EVENT_COLORS } from "@/lib/eventColors";
 import { useTimelineStore } from "@/store/timelineStore";

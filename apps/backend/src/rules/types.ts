@@ -1,4 +1,4 @@
-import type { EventType } from "@mc-log-timeline/shared-types";
+import type { EventType } from "@open-log/shared-types";
 
 export interface LogRule {
   id: string;

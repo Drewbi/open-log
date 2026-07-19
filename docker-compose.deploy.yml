@@ -1,6 +1,18 @@
+# Server-side compose file: pulls the prebuilt image from ghcr.io instead of
+# building from source, so the server doesn't need the repo cloned.
+#
+# Copy this to the server as docker-compose.yml alongside:
+#   .env                       (MC_DATA_DIR, DOMAIN, AUTH_PASSWORD_HASH,
+#                               SESSION_SECRET, and any optional overrides)
+#   Caddyfile
+#   config/rules.custom.json
+#
+# Deploy / update:
+#   docker compose pull && docker compose up -d
+
 services:
   open-log:
-    build: .
+    image: ghcr.io/drewbi/open-log:latest
     restart: unless-stopped
     environment:
       MC_LOGS_DIR: /app/mc-logs

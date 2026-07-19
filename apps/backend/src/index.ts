@@ -21,5 +21,5 @@ if (process.env.NODE_ENV === "production") {
 }
 
 app.listen(config.port, () => {
-  console.log(`mc-log-timeline backend listening on :${config.port}`);
+  console.log(`open-log backend listening on :${config.port}`);
 });

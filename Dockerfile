@@ -18,7 +18,7 @@ COPY apps/frontend apps/frontend
 COPY config config
 
 RUN pnpm install --frozen-lockfile
-RUN pnpm --filter @mc-log-timeline/frontend build
+RUN pnpm --filter @open-log/frontend build
 
 ENV NODE_ENV=production
 WORKDIR /app/apps/backend

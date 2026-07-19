@@ -19,8 +19,8 @@ pnpm dev:frontend                # vite dev server on apps/frontend, :5173, prox
 pnpm typecheck                  # tsc --noEmit across all packages (no test suite exists)
 pnpm build                      # production frontend build only (see "No backend build step" below)
 
-pnpm --filter @mc-log-timeline/backend backfill        # one-off: re-scan MC_LOGS_DIR into SQLite, print counts
-pnpm --filter @mc-log-timeline/backend hash-password <pw>  # generate AUTH_PASSWORD_HASH for .env
+pnpm --filter @open-log/backend backfill        # one-off: re-scan MC_LOGS_DIR into SQLite, print counts
+pnpm --filter @open-log/backend hash-password <pw>  # generate AUTH_PASSWORD_HASH for .env
 ```
 
 There is no lint config and no test runner in this repo — don't invent `pnpm lint`/`pnpm test` commands.

@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { scaleTime, type ScaleTime } from "d3-scale";
 import { select } from "d3-selection";
 import { zoom as d3zoom, zoomIdentity, type ZoomBehavior, type ZoomTransform } from "d3-zoom";
-import type { EventType } from "@mc-log-timeline/shared-types";
+import type { EventType } from "@open-log/shared-types";
 import { fetchEvents } from "@/api/client";
 import { CRITICAL_COLOR, EVENT_COLORS } from "@/lib/eventColors";
 import { useTimelineStore } from "@/store/timelineStore";

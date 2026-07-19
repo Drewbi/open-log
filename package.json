@@ -1,13 +1,13 @@
 {
-  "name": "mc-log-timeline",
+  "name": "open-log",
   "private": true,
   "engines": {
     "node": ">=20"
   },
   "scripts": {
-    "dev:backend": "pnpm --filter @mc-log-timeline/backend dev",
-    "dev:frontend": "pnpm --filter @mc-log-timeline/frontend dev",
-    "build": "pnpm --filter @mc-log-timeline/frontend build",
+    "dev:backend": "pnpm --filter @open-log/backend dev",
+    "dev:frontend": "pnpm --filter @open-log/frontend dev",
+    "build": "pnpm --filter @open-log/frontend build",
     "typecheck": "pnpm -r typecheck"
   }
 }

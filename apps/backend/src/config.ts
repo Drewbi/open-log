@@ -7,7 +7,7 @@ function resolveFromCwd(p: string): string {
 
 export const config = {
   logsDir: resolveFromCwd(process.env.MC_LOGS_DIR ?? "../../example-data/logs"),
-  dbPath: resolveFromCwd(process.env.DB_PATH ?? "./data/mc-log-timeline.db"),
+  dbPath: resolveFromCwd(process.env.DB_PATH ?? "./data/open-log.db"),
   port: Number(process.env.PORT ?? 4000),
   serverTzOffsetHours: Number(process.env.SERVER_TZ_OFFSET_HOURS ?? 0),
   watchUsePolling: process.env.WATCH_USE_POLLING === "true",

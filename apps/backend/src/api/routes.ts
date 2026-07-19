@@ -1,7 +1,7 @@
 import argon2 from "argon2";
 import { Router } from "express";
 import rateLimit from "express-rate-limit";
-import { EventsQuery, LoginRequest, RawLinesQuery, RawLinesSearchQuery } from "@mc-log-timeline/shared-types";
+import { EventsQuery, LoginRequest, RawLinesQuery, RawLinesSearchQuery } from "@open-log/shared-types";
 import { requireAuth } from "../auth/middleware.js";
 import { getSession } from "../auth/session.js";
 import { config } from "../config.js";

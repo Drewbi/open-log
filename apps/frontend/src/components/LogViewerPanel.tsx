@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useVirtualizer } from "@tanstack/react-virtual";
-import type { RawLine } from "@mc-log-timeline/shared-types";
+import type { RawLine } from "@open-log/shared-types";
 import { fetchRawLines } from "@/api/client";
 import { Switch } from "@/components/ui/switch";
 import { cn } from "@/lib/utils";
