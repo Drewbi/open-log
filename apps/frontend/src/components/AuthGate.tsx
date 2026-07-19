@@ -16,7 +16,7 @@ export function AuthGate({ children }: { children: ReactNode }) {
   });
 
   useEffect(() => {
-    document.title = data?.serverName ? `${data.serverName} — Open Log` : "Open Log";
+    document.title = `OPEN LOG // ${data?.serverName || "TIMELINE"}`;
   }, [data?.serverName]);
 
   const loginMutation = useMutation({
