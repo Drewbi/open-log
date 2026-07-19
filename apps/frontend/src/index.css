@@ -30,8 +30,9 @@
     --radius: 2px;
   }
 
-  /* Dual-channel tech-brutalist dark theme: near-black base, safety-orange
-     reserved for critical/high-severity, cyan-blue for everything else. */
+  /* Tech-brutalist dark theme: near-black base with a pale-blue accent for
+     chrome/selection/live state. Keep --primary in sync with the ACCENT
+     constant in TimelinePanel.tsx (canvas can't read CSS variables cheaply). */
   .dark {
     --background: 0 0% 6%;
     --foreground: 40 8% 92%;
@@ -39,7 +40,7 @@
     --card-foreground: 40 8% 92%;
     --popover: 0 0% 8%;
     --popover-foreground: 40 8% 92%;
-    --primary: 20 100% 55%;
+    --primary: 203 65% 75%;
     --primary-foreground: 0 0% 6%;
     --secondary: 0 0% 14%;
     --secondary-foreground: 40 8% 92%;
@@ -51,7 +52,7 @@
     --destructive-foreground: 0 0% 98%;
     --border: 0 0% 20%;
     --input: 0 0% 18%;
-    --ring: 20 100% 55%;
+    --ring: 203 65% 75%;
   }
 }
 
