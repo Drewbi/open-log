@@ -39,6 +39,7 @@ pnpm --filter @open-log/backend hash-password <your-password>
 pnpm typecheck                                            # tsc --noEmit, all packages
 pnpm build                                                 # production frontend build
 pnpm --filter @open-log/backend backfill            # re-scan MC_LOGS_DIR into SQLite
+pnpm --filter @open-log/backend reprocess           # apply current rules to already-ingested history
 ```
 
 There's no lint config or test runner in this repo.

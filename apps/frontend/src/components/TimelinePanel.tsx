@@ -5,7 +5,7 @@ import { select } from "d3-selection";
 import { zoom as d3zoom, zoomIdentity, type ZoomBehavior, type ZoomTransform } from "d3-zoom";
 import type { EventType } from "@open-log/shared-types";
 import { fetchEvents } from "@/api/client";
-import { CRITICAL_COLOR, EVENT_COLORS } from "@/lib/eventColors";
+import { EVENT_COLORS } from "@/lib/eventColors";
 import { useTimelineStore } from "@/store/timelineStore";
 
 const DAY_MS = 24 * 60 * 60 * 1000;
@@ -28,7 +28,9 @@ const GUTTER = 54; // left margin reserved for track labels; the time scale's
 const GLYPH_REACH = 0.8;
 const GLYPH_SCALE = 0.85;
 
-const CRITICAL = CRITICAL_COLOR;
+// UI accent for canvas-drawn selection state — keep in sync with --primary
+// in index.css (hsl(203 65% 75%)).
+const ACCENT = "#96c9e9";
 const CLUSTER_COLOR = "#8a8a8a";
 const BG = "#0f0f0f";
 const GRID_LINE = "#3f3f46";
@@ -516,7 +518,7 @@ export function TimelinePanel() {
         drawSelectionBrackets(ctx, marker.x, marker.y, half + 3);
       }
 
-      ctx.fillStyle = CRITICAL;
+      ctx.fillStyle = marker.color;
       ctx.font = "10px 'JetBrains Mono', ui-monospace, monospace";
       ctx.textAlign = "left";
       ctx.fillText(marker.label.toUpperCase(), marker.x + half + 5, marker.y + 3);
@@ -693,7 +695,7 @@ export function TimelinePanel() {
 
 function drawSelectionBrackets(ctx: CanvasRenderingContext2D, cx: number, cy: number, r: number) {
   const len = 4;
-  ctx.strokeStyle = CRITICAL;
+  ctx.strokeStyle = ACCENT;
   ctx.lineWidth = 1.5;
   ctx.beginPath();
   // 4 corner ticks instead of a ring, to match the bracket motif. Each corner

@@ -2,8 +2,7 @@ import type { EventType } from "@open-log/shared-types";
 
 // One distinct color per event type (not just a severity channel) so markers
 // are identifiable by color alone, in addition to their glyph shape. Command
-// stays the "critical" orange accent used elsewhere in the UI for high
-// severity/live/selection state.
+// keeps a high-visibility orange distinct from every other marker color.
 export const EVENT_COLORS: Record<EventType, string> = {
   join: "#4ade80",
   leave: "#94a3b8",
@@ -15,5 +14,3 @@ export const EVENT_COLORS: Record<EventType, string> = {
   sleep: "#a78bfa",
   warning: "#f472b6",
 };
-
-export const CRITICAL_COLOR = EVENT_COLORS.command;
