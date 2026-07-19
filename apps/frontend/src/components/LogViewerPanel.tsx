@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import type { RawLine } from "@open-log/shared-types";
 import { fetchRawLines } from "@/api/client";
@@ -9,7 +9,9 @@ import { useTimelineStore } from "@/store/timelineStore";
 
 const TAIL_SIZE = 400;
 const JUMP_WINDOW = 150;
+const LOAD_MORE_SIZE = 150;
 const BOTTOM_THRESHOLD_PX = 48;
+const LOAD_MORE_THRESHOLD_PX = 600;
 
 function levelClass(level: string | null): string {
   if (level === "ERROR") return "text-destructive";
@@ -28,6 +30,12 @@ export function LogViewerPanel() {
   const hasScrolledForJump = useRef<number | null>(null);
   const isAtBottomRef = useRef(true);
   const [isAtBottom, setIsAtBottom] = useState(true);
+  const queryClient = useQueryClient();
+  const loadingOlderRef = useRef(false);
+  const loadingNewerRef = useRef(false);
+  const olderExhaustedRef = useRef(false);
+  const newerExhaustedRef = useRef(false);
+  const pendingScrollAdjustRef = useRef<{ prevScrollHeight: number; prevScrollTop: number } | null>(null);
   const [hoveredLineId, setHoveredLineId] = useState<number | null>(null);
   // Sticks after a click (unlike hover, which clears on mouse-leave) so the
   // clicked line stays highlighted and keeps driving the playhead/timeline
@@ -59,6 +67,74 @@ export function LogViewerPanel() {
 
   useEffect(() => () => setPlayheadTsMs(null), [setPlayheadTsMs]);
 
+  // The initial fetch is a fixed window (TAIL_SIZE or JUMP_WINDOW lines) —
+  // these grow it as the user scrolls toward either edge, so jumping to a
+  // marker doesn't hard-cap the log at ~300 lines of context.
+  const queryKey = ["raw-lines", jumpToRawLineId];
+
+  useEffect(() => {
+    loadingOlderRef.current = false;
+    loadingNewerRef.current = false;
+    olderExhaustedRef.current = false;
+    newerExhaustedRef.current = false;
+  }, [jumpToRawLineId]);
+
+  const loadOlder = async () => {
+    if (loadingOlderRef.current || olderExhaustedRef.current) return;
+    const current = queryClient.getQueryData<{ lines: RawLine[] }>(queryKey)?.lines;
+    if (!current || current.length === 0) return;
+    loadingOlderRef.current = true;
+    const el = parentRef.current;
+    const prevScrollHeight = el?.scrollHeight ?? 0;
+    const prevScrollTop = el?.scrollTop ?? 0;
+    try {
+      const firstId = current[0].id;
+      const result = await fetchRawLines({ aroundId: firstId, before: LOAD_MORE_SIZE, after: 0 });
+      const older = result.lines.filter((l) => l.id !== firstId);
+      if (older.length < LOAD_MORE_SIZE) olderExhaustedRef.current = true;
+      if (older.length > 0) {
+        pendingScrollAdjustRef.current = { prevScrollHeight, prevScrollTop };
+        queryClient.setQueryData<{ lines: RawLine[] }>(queryKey, (old) =>
+          old ? { lines: [...older, ...old.lines] } : old,
+        );
+      }
+    } finally {
+      loadingOlderRef.current = false;
+    }
+  };
+
+  const loadNewer = async () => {
+    if (loadingNewerRef.current || newerExhaustedRef.current) return;
+    const current = queryClient.getQueryData<{ lines: RawLine[] }>(queryKey)?.lines;
+    if (!current || current.length === 0) return;
+    loadingNewerRef.current = true;
+    try {
+      const lastId = current[current.length - 1].id;
+      const result = await fetchRawLines({ aroundId: lastId, before: 0, after: LOAD_MORE_SIZE });
+      const newer = result.lines.filter((l) => l.id !== lastId);
+      if (newer.length < LOAD_MORE_SIZE) newerExhaustedRef.current = true;
+      if (newer.length > 0) {
+        queryClient.setQueryData<{ lines: RawLine[] }>(queryKey, (old) =>
+          old ? { lines: [...old.lines, ...newer] } : old,
+        );
+      }
+    } finally {
+      loadingNewerRef.current = false;
+    }
+  };
+
+  // Prepending older lines shifts every existing row to a higher index; undo
+  // the resulting scroll jump by re-applying the pre-prepend scrollTop offset
+  // against the new (taller) scrollHeight, so the visible content doesn't move.
+  useLayoutEffect(() => {
+    const pending = pendingScrollAdjustRef.current;
+    if (!pending) return;
+    pendingScrollAdjustRef.current = null;
+    const el = parentRef.current;
+    if (!el) return;
+    el.scrollTop = pending.prevScrollTop + (el.scrollHeight - pending.prevScrollHeight);
+  }, [lines]);
+
   // Clicking a log line pins the playhead there and asks the timeline to
   // pan/zoom to that instant — the mirror of clicking a timeline marker,
   // which jumps the log viewer to a raw line.
@@ -70,6 +146,7 @@ export function LogViewerPanel() {
   const virtualizer = useVirtualizer({
     count: lines.length,
     getScrollElement: () => parentRef.current,
+    getItemKey: (index) => lines[index].id,
     estimateSize: () => 22,
     overscan: 20,
   });
@@ -113,12 +190,17 @@ export function LogViewerPanel() {
 
   const handleScroll = () => {
     const el = parentRef.current;
-    if (!el || !isTailMode) return;
-    const atBottom = el.scrollTop + el.clientHeight >= el.scrollHeight - BOTTOM_THRESHOLD_PX;
-    if (atBottom !== isAtBottomRef.current) {
-      isAtBottomRef.current = atBottom;
-      setIsAtBottom(atBottom);
+    if (!el) return;
+    if (isTailMode) {
+      const atBottom = el.scrollTop + el.clientHeight >= el.scrollHeight - BOTTOM_THRESHOLD_PX;
+      if (atBottom !== isAtBottomRef.current) {
+        isAtBottomRef.current = atBottom;
+        setIsAtBottom(atBottom);
+      }
+    } else if (el.scrollTop + el.clientHeight > el.scrollHeight - LOAD_MORE_THRESHOLD_PX) {
+      void loadNewer();
     }
+    if (el.scrollTop < LOAD_MORE_THRESHOLD_PX) void loadOlder();
   };
 
   return (

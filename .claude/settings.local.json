@@ -25,6 +25,7 @@
       "mcp__playwright__browser_fill_form",
       "PowerShell(pnpm typecheck *)",
       "PowerShell(nvm list *)",
+      "mcp__playwright__browser_find",
       "PowerShell(pnpm *)"
     ],
     "ask": [
