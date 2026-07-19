@@ -1,4 +1,4 @@
-# mc-log-timeline
+# Open-Log
 
 Ingests a Minecraft server's log files and presents them as a searchable
 timeline: a Canvas view of points of interest (joins/leaves/chat/deaths/op
@@ -30,7 +30,7 @@ logs in `example-data/logs/`.
 Generate an auth password hash:
 
 ```bash
-pnpm --filter @mc-log-timeline/backend hash-password <your-password>
+pnpm --filter @open-log/backend hash-password <your-password>
 ```
 
 ## Other commands
@@ -38,7 +38,7 @@ pnpm --filter @mc-log-timeline/backend hash-password <your-password>
 ```bash
 pnpm typecheck                                            # tsc --noEmit, all packages
 pnpm build                                                 # production frontend build
-pnpm --filter @mc-log-timeline/backend backfill            # re-scan MC_LOGS_DIR into SQLite
+pnpm --filter @open-log/backend backfill            # re-scan MC_LOGS_DIR into SQLite
 ```
 
 There's no lint config or test runner in this repo.
