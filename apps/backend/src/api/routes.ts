@@ -25,7 +25,7 @@ const loginLimiter = rateLimit({
 
 apiRouter.get("/auth/status", async (req, res) => {
   const session = await getSession(req, res);
-  res.json({ authenticated: Boolean(session.authenticated) });
+  res.json({ authenticated: Boolean(session.authenticated), serverName: config.serverName });
 });
 
 apiRouter.post("/auth/login", loginLimiter, async (req, res) => {

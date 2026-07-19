@@ -1,4 +1,4 @@
-import { type FormEvent, type ReactNode, useState } from "react";
+import { type FormEvent, type ReactNode, useEffect, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { getAuthStatus, login } from "@/api/client";
 import { Button } from "@/components/ui/button";
@@ -14,6 +14,10 @@ export function AuthGate({ children }: { children: ReactNode }) {
     queryKey: ["auth-status"],
     queryFn: getAuthStatus,
   });
+
+  useEffect(() => {
+    document.title = data?.serverName ? `${data.serverName} — Open Log` : "Open Log";
+  }, [data?.serverName]);
 
   const loginMutation = useMutation({
     mutationFn: login,
@@ -38,7 +42,7 @@ export function AuthGate({ children }: { children: ReactNode }) {
           <Card className="w-80 border-border">
             <CardHeader>
               <CardTitle className="label-caps text-foreground">
-                MC LOG <span className="text-muted-foreground">// TIMELINE</span>
+                OPEN LOG <span className="text-muted-foreground">// {data?.serverName || "TIMELINE"}</span>
               </CardTitle>
             </CardHeader>
             <CardContent>

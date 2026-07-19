@@ -25,7 +25,7 @@ pnpm --filter @open-log/backend hash-password <pw>  # generate AUTH_PASSWORD_HAS
 
 There is no lint config and no test runner in this repo — don't invent `pnpm lint`/`pnpm test` commands.
 
-Backend env vars are read from `apps/backend/.env` (see `.env.example` there for the full list: `MC_LOGS_DIR`, `DB_PATH`, `PORT`, `SERVER_TZ_OFFSET_HOURS`, `WATCH_USE_POLLING`, `AUTH_PASSWORD_HASH`, `SESSION_SECRET`). Without `MC_LOGS_DIR` set, the backend defaults to `example-data/logs/` (real anonymized sample data checked into the repo) — useful for iterating on rule patterns without a live server.
+Backend env vars are read from `apps/backend/.env` (see `.env.example` there for the full list: `MC_LOGS_DIR`, `DB_PATH`, `PORT`, `SERVER_TZ_OFFSET_HOURS`, `WATCH_USE_POLLING`, `AUTH_PASSWORD_HASH`, `SESSION_SECRET`, `SERVER_NAME`). Without `MC_LOGS_DIR` set, the backend defaults to `example-data/logs/` (real anonymized sample data checked into the repo) — useful for iterating on rule patterns without a live server. `SERVER_NAME` is optional branding (shown in the page title and header via `/api/auth/status`, which is public precisely so the login screen can show it too) — falls back to "Open Log" / "TIMELINE" when unset.
 
 Deployment is `docker compose build && docker compose up -d` at the repo root (or `docker-compose.deploy.yml`, which pulls the prebuilt `ghcr.io/drewbi/open-log` image instead of building — CI publishes it on every push to `main`), using the root `.env.example` (`MC_DATA_DIR` plus the auth vars). The app publishes `127.0.0.1:4000` only; HTTPS/public exposure is deliberately out of scope — deployers bring their own reverse proxy.
 

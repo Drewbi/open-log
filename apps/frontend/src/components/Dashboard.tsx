@@ -1,4 +1,5 @@
-import { logout } from "@/api/client";
+import { useQuery } from "@tanstack/react-query";
+import { getAuthStatus, logout } from "@/api/client";
 import { Button } from "@/components/ui/button";
 import { FilterBar } from "@/components/FilterBar";
 import { LogViewerPanel } from "@/components/LogViewerPanel";
@@ -8,6 +9,7 @@ import { useLiveTail } from "@/hooks/useLiveTail";
 
 export function Dashboard() {
   useLiveTail();
+  const { data } = useQuery({ queryKey: ["auth-status"], queryFn: getAuthStatus });
 
   return (
     <div className="flex h-screen flex-col bg-background text-foreground">
@@ -18,7 +20,7 @@ export function Dashboard() {
             <span className="relative inline-flex h-2 w-2 bg-primary" />
           </span>
           <h1 className="text-sm font-bold uppercase tracking-[0.2em]">
-            MC LOG <span className="text-muted-foreground">// TIMELINE</span>
+            OPEN LOG <span className="text-muted-foreground">// {data?.serverName || "TIMELINE"}</span>
           </h1>
         </div>
         <div className="flex items-center gap-3">

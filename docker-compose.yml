@@ -7,6 +7,7 @@ services:
       DB_PATH: /app/data/open-log.db
       PORT: "4000"
       SERVER_TZ_OFFSET_HOURS: ${SERVER_TZ_OFFSET_HOURS:-0}
+      SERVER_NAME: ${SERVER_NAME:-}
       # Bind-mounted host log folders (especially under Docker Desktop) don't
       # always deliver native inotify events reliably; polling is the safe
       # default. Set to "false" if you've confirmed native events work (e.g.

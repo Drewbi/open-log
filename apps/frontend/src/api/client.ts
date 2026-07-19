@@ -42,7 +42,7 @@ export function searchRawLines(q: string, limit = 100): Promise<{ lines: RawLine
   return getJson("/api/raw-lines/search", { q, limit });
 }
 
-export async function getAuthStatus(): Promise<{ authenticated: boolean }> {
+export async function getAuthStatus(): Promise<{ authenticated: boolean; serverName: string }> {
   const res = await fetch("/api/auth/status");
   if (!res.ok) throw new Error(`auth status failed: ${res.status}`);
   return res.json();
