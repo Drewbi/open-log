@@ -1,4 +1,4 @@
-FROM node:20-bookworm-slim
+FROM node:22-bookworm-slim
 
 # python3/make/g++ let better-sqlite3 fall back to a source build if no
 # prebuilt binary matches this platform; ca-certificates for the prebuild

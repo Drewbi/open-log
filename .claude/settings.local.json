@@ -23,7 +23,8 @@
       "mcp__playwright__browser_hover",
       "mcp__playwright__browser_tabs",
       "mcp__playwright__browser_fill_form",
-      "PowerShell(pnpm typecheck *)"
+      "PowerShell(pnpm typecheck *)",
+      "PowerShell(nvm list *)"
     ],
     "ask": [
       "Bash(rm *)",

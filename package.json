@@ -1,8 +1,9 @@
 {
   "name": "open-log",
   "private": true,
+  "packageManager": "pnpm@11.15.0",
   "engines": {
-    "node": ">=20"
+    "node": ">=22.13"
   },
   "scripts": {
     "dev:backend": "pnpm --filter @open-log/backend dev",
