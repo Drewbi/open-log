@@ -2,9 +2,8 @@
 # building from source, so the server doesn't need the repo cloned.
 #
 # Copy this to the server as docker-compose.yml alongside:
-#   .env                       (MC_DATA_DIR, DOMAIN, AUTH_PASSWORD_HASH,
-#                               SESSION_SECRET, and any optional overrides)
-#   Caddyfile
+#   .env                       (MC_DATA_DIR, AUTH_PASSWORD_HASH, SESSION_SECRET,
+#                               and any optional overrides)
 #   config/rules.custom.json
 #
 # Deploy / update:
@@ -37,25 +36,12 @@ services:
       interval: 30s
       timeout: 5s
       retries: 3
-    # No "ports:" here on purpose — only Caddy is reachable from outside the
-    # docker network; the app port itself stays internal.
-
-  caddy:
-    image: caddy:2-alpine
-    restart: unless-stopped
     ports:
-      - "80:80"
-      - "443:443"
-    environment:
-      DOMAIN: ${DOMAIN}
-    volumes:
-      - ./Caddyfile:/etc/caddy/Caddyfile:ro
-      - caddy-data:/data
-      - caddy-config:/config
-    depends_on:
-      - open-log
+      # Bound to localhost on purpose: bring your own reverse proxy (Caddy,
+      # nginx, Traefik, ...) for HTTPS and public exposure. If your proxy runs
+      # in Docker, drop this and attach both containers to a shared network
+      # instead, proxying to open-log:4000.
+      - "127.0.0.1:4000:4000"
 
 volumes:
   open-log-data:
-  caddy-data:
-  caddy-config:

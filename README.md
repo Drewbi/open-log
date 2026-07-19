@@ -49,8 +49,13 @@ There's no lint config or test runner in this repo.
 docker compose build && docker compose up -d
 ```
 
-Copy the root `.env.example` to `.env` first. Caddy fronts the app for
-automatic HTTPS; the app container publishes no ports directly.
+Copy the root `.env.example` to `.env` first. Or skip the build entirely and
+use `docker-compose.deploy.yml`, which pulls the prebuilt image from ghcr.io.
+
+The app listens on `127.0.0.1:4000` — put your own reverse proxy (Caddy,
+nginx, Traefik, ...) in front of it for HTTPS and public exposure. If the
+proxy runs in Docker, attach both containers to a shared network and proxy
+to `open-log:4000` instead of publishing the port.
 
 ## Architecture
 
