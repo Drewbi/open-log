@@ -92,6 +92,35 @@ export function upsertCheckpoint(checkpoint: Checkpoint): void {
   upsertCheckpointStmt.run({ ...checkpoint, completed: checkpoint.completed ? 1 : 0 });
 }
 
+const getRawLineTextStmt = db.prepare(`
+  SELECT raw_text FROM raw_lines WHERE file_key = ? AND line_no = ?
+`);
+
+export function getRawLineText(fileKey: string, lineNo: number): string | null {
+  const row = getRawLineTextStmt.get(fileKey, lineNo) as { raw_text: string } | undefined;
+  return row?.raw_text ?? null;
+}
+
+const reassignRawLinesStmt = db.prepare(`
+  UPDATE raw_lines SET file_key = @toKey WHERE file_key = @fromKey
+`);
+
+// Moves every raw_lines row from one file_key to another, keeping ids and
+// line numbers. Used on log rotation to hand latest.log's already-ingested
+// rows over to the rotated file they became; the target key must have no
+// rows yet or the (file_key, line_no) unique index will reject the update.
+export function reassignRawLines(fromKey: string, toKey: string): void {
+  reassignRawLinesStmt.run({ fromKey, toKey });
+}
+
+const deleteCheckpointStmt = db.prepare(`
+  DELETE FROM ingest_checkpoints WHERE file_key = ?
+`);
+
+export function deleteCheckpoint(fileKey: string): void {
+  deleteCheckpointStmt.run(fileKey);
+}
+
 export function withTransaction<T>(fn: () => T): T {
   return db.transaction(fn)();
 }

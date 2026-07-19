@@ -6,10 +6,13 @@ import chokidar from "chokidar";
 import type { EventType } from "@open-log/shared-types";
 import { config } from "../config.js";
 import {
+  deleteCheckpoint,
   getCheckpoint,
   getKnownActors,
+  getRawLineText,
   insertEvent,
   insertRawLine,
+  reassignRawLines,
   upsertCheckpoint,
   withTransaction,
 } from "../db/queries.js";
@@ -133,6 +136,14 @@ function processLines(
   return lineNo;
 }
 
+function readRotatedFile(dir: string, fileName: string): { lines: string[]; byteLength: number } {
+  const filePath = path.join(dir, fileName);
+  const raw = fileName.endsWith(".gz")
+    ? zlib.gunzipSync(fs.readFileSync(filePath))
+    : fs.readFileSync(filePath);
+  return { lines: splitLines(raw.toString("utf-8")), byteLength: raw.length };
+}
+
 function processRotatedFile(
   dir: string,
   fileName: string,
@@ -142,22 +153,36 @@ function processRotatedFile(
   const existing = getCheckpoint(fileName);
   if (existing?.completed) return;
 
-  const filePath = path.join(dir, fileName);
-  const raw = fileName.endsWith(".gz")
-    ? zlib.gunzipSync(fs.readFileSync(filePath))
-    : fs.readFileSync(filePath);
-  const lines = splitLines(raw.toString("utf-8"));
+  const { lines, byteLength } = readRotatedFile(dir, fileName);
 
-  const seedDate = dateFromRotatedFilename(fileName) ?? new Date().toISOString().slice(0, 10);
-  const clock = new DayClock(seedDate, config.serverTzOffsetHours);
+  // A non-completed checkpoint with lineNo > 0 means resolveRotation handed
+  // this file the rows already ingested live from latest.log — resume after
+  // them instead of re-ingesting (which is what used to duplicate every POI
+  // after each rotation).
+  const startLineNo = existing?.lineNo ?? 0;
+  const remaining = lines.slice(startLineNo);
 
-  const finalLineNo = processLines(fileName, 0, lines, clock, ruleEngine, state);
+  // When resuming, seed the clock from where the live tail left off (the
+  // filename's start date would be a day off if the file spans midnight) and
+  // prime it with the tail's last time-of-day so rollover detection still
+  // works across the resume point.
+  let clock: DayClock;
+  if (existing?.lastTsMs != null) {
+    const lastLocal = new Date(existing.lastTsMs + config.serverTzOffsetHours * 3600_000);
+    clock = new DayClock(lastLocal.toISOString().slice(0, 10), config.serverTzOffsetHours);
+    clock.resolve(lastLocal.getUTCHours(), lastLocal.getUTCMinutes(), lastLocal.getUTCSeconds());
+  } else {
+    const seedDate = dateFromRotatedFilename(fileName) ?? new Date().toISOString().slice(0, 10);
+    clock = new DayClock(seedDate, config.serverTzOffsetHours);
+  }
+
+  const finalLineNo = processLines(fileName, startLineNo, remaining, clock, ruleEngine, state);
   upsertCheckpoint({
     fileKey: fileName,
     inode: null,
-    byteOffset: raw.length,
+    byteOffset: byteLength,
     lineNo: finalLineNo,
-    lastTsMs: clock.lastResolvedMs(),
+    lastTsMs: remaining.length > 0 ? clock.lastResolvedMs() : (existing?.lastTsMs ?? clock.lastResolvedMs()),
     completed: true,
   });
 }
@@ -228,15 +253,95 @@ function processLatestFile(dir: string, ruleEngine: RuleEngine, state: IngestSta
   });
 }
 
+// Grace period for the window where latest.log has been renamed away but its
+// rotated .gz hasn't been written yet — during it we hold off tailing the new
+// latest.log rather than orphaning the old generation's rows prematurely.
+const ROTATION_GRACE_MS = 30_000;
+let rotationPendingSinceMs: number | null = null;
+
+// Detects that latest.log was rotated (inode changed / file gone) and hands
+// the already-ingested rows — keyed 'latest.log' — over to the rotated file
+// they became: re-key the rows to that filename and leave a non-completed
+// checkpoint at the tailed line count so processRotatedFile resumes after
+// them. Without this handover the rotated file's backfill re-ingested the
+// whole file under its own file_key (duplicating every POI event), and the
+// new latest.log generation's line numbers collided with the old rows, so
+// INSERT OR IGNORE silently attached new events to stale raw lines.
+//
+// Returns false while a rotation is detected but the rotated file hasn't
+// appeared yet — the caller must skip tailing latest.log for that sweep so
+// the old rows stay claimable.
+function resolveRotation(dir: string, rotatedNames: string[]): boolean {
+  const cp = getCheckpoint(LATEST_LOG);
+  if (!cp) return true;
+
+  const latestPath = path.join(dir, LATEST_LOG);
+  if (fs.existsSync(latestPath) && String(fs.statSync(latestPath).ino) === cp.inode) {
+    rotationPendingSinceMs = null;
+    return true;
+  }
+
+  if (cp.lineNo > 0) {
+    const firstStored = getRawLineText(LATEST_LOG, 1);
+    const lastStored = getRawLineText(LATEST_LOG, cp.lineNo);
+    // The rotated file we're looking for contains everything we tailed, in
+    // order, from line 1 — verify by matching first and last tailed lines
+    // (stored redacted, so redact the file's lines before comparing). Newest
+    // candidates first: ours is the most recently rotated.
+    const candidates = rotatedNames.filter((f) => !getCheckpoint(f)).sort().reverse();
+    for (const fileName of candidates) {
+      const { lines } = readRotatedFile(dir, fileName);
+      if (lines.length < cp.lineNo) continue;
+      if (redactLine(lines[0]) !== firstStored) continue;
+      if (redactLine(lines[cp.lineNo - 1]) !== lastStored) continue;
+      withTransaction(() => {
+        reassignRawLines(LATEST_LOG, fileName);
+        upsertCheckpoint({
+          fileKey: fileName,
+          inode: null,
+          byteOffset: 0,
+          lineNo: cp.lineNo,
+          lastTsMs: cp.lastTsMs,
+          completed: false,
+        });
+        deleteCheckpoint(LATEST_LOG);
+      });
+      rotationPendingSinceMs = null;
+      return true;
+    }
+
+    // No rotated file matches yet — most likely mid-rotation (renamed, not
+    // yet gzipped). Hold off briefly; if nothing ever shows up, park the rows
+    // under a synthetic key so the new generation can't collide with them.
+    // (If their rotated file appears after that, it backfills in full and
+    // duplicates that one generation — the bounded worst case, preferred over
+    // stalling ingestion indefinitely.)
+    if (rotationPendingSinceMs === null) rotationPendingSinceMs = Date.now();
+    if (Date.now() - rotationPendingSinceMs < ROTATION_GRACE_MS) return false;
+    withTransaction(() => {
+      reassignRawLines(LATEST_LOG, `${LATEST_LOG}.orphaned.${Date.now()}`);
+      deleteCheckpoint(LATEST_LOG);
+    });
+  } else {
+    deleteCheckpoint(LATEST_LOG);
+  }
+  rotationPendingSinceMs = null;
+  return true;
+}
+
 export function runIngestSweep(ruleEngine: RuleEngine, state: IngestState): void {
   const dir = config.logsDir;
   if (!fs.existsSync(dir)) return;
 
   const entries = fs.readdirSync(dir);
-  for (const fileName of entries.filter(isRotatedFile).sort()) {
+  const rotatedNames = entries.filter(isRotatedFile).sort();
+  // Must run before the rotated-file loop so a freshly rotated file gets its
+  // resume checkpoint before processRotatedFile would backfill it from 0.
+  const canTailLatest = resolveRotation(dir, rotatedNames);
+  for (const fileName of rotatedNames) {
     processRotatedFile(dir, fileName, ruleEngine, state);
   }
-  processLatestFile(dir, ruleEngine, state);
+  if (canTailLatest) processLatestFile(dir, ruleEngine, state);
 }
 
 export function startIngestion(ruleEngine: RuleEngine): () => void {
