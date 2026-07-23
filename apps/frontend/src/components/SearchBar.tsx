@@ -36,7 +36,7 @@ export function SearchBar() {
   };
 
   return (
-    <div className="relative w-80">
+    <div className="relative w-28 shrink-0 sm:w-80">
       <div className="relative">
         <Search className="pointer-events-none absolute left-2 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
         <Input
@@ -45,7 +45,7 @@ export function SearchBar() {
           onFocus={() => results.length > 0 && setOpen(true)}
           onBlur={() => setTimeout(() => setOpen(false), 150)}
           placeholder="SEARCH LOGS…"
-          className="h-8 pl-7 text-xs uppercase tracking-wide placeholder:text-muted-foreground focus-visible:ring-primary"
+          className="h-8 w-full min-w-0 pl-7 text-xs uppercase tracking-wide placeholder:text-muted-foreground focus-visible:ring-primary"
         />
       </div>
       {open && results.length > 0 && (

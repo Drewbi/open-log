@@ -1,7 +1,15 @@
-import type { CSSProperties } from "react";
-import { LogIn, LogOut, MessageSquare, Moon, Power, Skull, Terminal, TriangleAlert } from "lucide-react";
+import { Filter, LogIn, LogOut, MessageSquare, Moon, Power, Skull, Terminal, TriangleAlert } from "lucide-react";
 import type { EventType } from "@open-log/shared-types";
-import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { EVENT_COLORS } from "@/lib/eventColors";
 import { useTimelineStore } from "@/store/timelineStore";
 
@@ -19,44 +27,52 @@ const TYPE_META: Array<{ type: EventType; label: string; icon: typeof LogIn }> =
 
 export function FilterBar() {
   const activeFilters = useTimelineStore((s) => s.activeFilters);
+  const toggleFilter = useTimelineStore((s) => s.toggleFilter);
   const setFilters = useTimelineStore((s) => s.setFilters);
 
   return (
     <div className="flex items-center gap-3 border-b border-dashed px-3 py-2">
-      <span className="label-caps">
-        {activeFilters.size === 0 ? "Showing all events" : "Filtered"}
+      <span className="label-caps truncate">
+        {activeFilters.size === 0 ? "Showing all events" : `Filtered (${activeFilters.size})`}
       </span>
-      <ToggleGroup
-        type="multiple"
-        size="sm"
-        value={Array.from(activeFilters)}
-        onValueChange={(value: string[]) => setFilters(value as EventType[])}
-      >
-        {TYPE_META.map(({ type, label, icon: Icon }) => {
-          const isActive = activeFilters.has(type);
-          const color = EVENT_COLORS[type];
-          // Radix's own data-[state=on]:bg-accent utility (toggle.tsx) has the
-          // same CSS specificity as any class-based override here, so the
-          // active per-type color has to be set as inline style (computed
-          // from the store's activeFilters, which this component already
-          // has) rather than relying on a data-state CSS selector to win.
-          const activeStyle: CSSProperties | undefined = isActive
-            ? { backgroundColor: color, borderColor: color, color: "#0a0a0a" }
-            : undefined;
-          return (
-            <ToggleGroupItem
-              key={type}
-              value={type}
-              aria-label={label}
-              style={activeStyle}
-              className="gap-1.5 border border-transparent px-2 text-xs uppercase tracking-wide"
-            >
-              <Icon className="h-3.5 w-3.5" />
-              {label}
-            </ToggleGroupItem>
-          );
-        })}
-      </ToggleGroup>
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button variant="outline" size="sm" className="label-caps ml-auto shrink-0 gap-1.5 px-2.5">
+            <Filter className="h-3.5 w-3.5" />
+            Filter
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end" className="w-52">
+          <DropdownMenuLabel className="label-caps">Event types</DropdownMenuLabel>
+          <DropdownMenuSeparator />
+          {TYPE_META.map(({ type, label, icon: Icon }) => {
+            const color = EVENT_COLORS[type];
+            return (
+              <DropdownMenuCheckboxItem
+                key={type}
+                checked={activeFilters.has(type)}
+                onSelect={(e) => e.preventDefault()}
+                onCheckedChange={() => toggleFilter(type)}
+                className="gap-2 text-xs uppercase tracking-wide"
+              >
+                <Icon className="h-3.5 w-3.5" style={{ color }} />
+                {label}
+              </DropdownMenuCheckboxItem>
+            );
+          })}
+          {activeFilters.size > 0 && (
+            <>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem
+                onSelect={() => setFilters([])}
+                className="label-caps text-muted-foreground"
+              >
+                Clear filters
+              </DropdownMenuItem>
+            </>
+          )}
+        </DropdownMenuContent>
+      </DropdownMenu>
     </div>
   );
 }
