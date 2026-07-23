@@ -10,6 +10,7 @@ const ruleEngine = RuleEngine.loadFromFiles(config.rulesDefaultPath, config.rule
 startIngestion(ruleEngine);
 
 const app = express();
+app.set("trust proxy", "loopback");
 app.use(express.json());
 app.use("/api", apiRouter);
 
